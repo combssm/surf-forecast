@@ -1,7 +1,8 @@
 from flask import Flask, render_template
 import requests
 import time
-import plotly.graph_objects as go
+from plotly.offline import plot
+from plotly.graph_objs import Scatter
 
 app = Flask(__name__)
 
@@ -31,10 +32,8 @@ def home():
     for i in response:
         f = Forecast(i)
         fdata.append(f)
-    graph = go.Figure(
-        data=[go.Bar(x=[x.timestamp for x in fdata],y=[y.max_swell_height for y in fdata])],
-        layout_title_text="4 day Forecast for S-Turns, NC"
-    )
+
+    graph = plot([Scatter(x=[x.timestamp for x in fdata], y=[y.max_swell_height for y in fdata])], output_type='div')    
     return render_template('index.html', fdata=fdata, graph=graph)
 
 if __name__ == '__main__':
