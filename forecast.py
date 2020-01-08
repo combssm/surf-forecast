@@ -2,6 +2,7 @@ from flask import Flask, render_template
 from plotly.offline import plot
 from plotly.graph_objs import Scatter
 import requests
+import time
 
 app = Flask(__name__)
 
