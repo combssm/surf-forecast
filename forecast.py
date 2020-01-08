@@ -17,8 +17,8 @@ def home():
     fdata = []
     for i in response:
         t = i['timestamp']
-        sminh = i['minBreakingHeight']
-        smaxh = i['maxBreakingHeight']
+        sminh = i['swell']['minBreakingHeight']
+        smaxh = i['swell']['maxBreakingHeight']
         sh = i['swell']['components']['primary']['height']
         sd = i['swell']['components']['primary']['compassDirection']
         ws = i['wind']['speed']
