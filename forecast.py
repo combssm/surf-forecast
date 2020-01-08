@@ -13,8 +13,21 @@ def home():
     except Exception as e:
         return "<h2>Unable to retrieve swell data: {}</h2>".format(e)
 
-    item = response[0]
-    return render_template('index.html', item=item)
+    fdata = []
+    for i in response:
+        t = i['timestamp']
+        sh = i['swell']['components']['primary']['height']
+        sd = i['swell']['components']['primary']['compassDirection']
+        ws = i['wind']['speed']
+        wd = i['wind']['compassDirection']
+        fdata.append({
+            "time": time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(t)),
+            "swellheight": sh,
+            "swelldirection": sd,
+            "windspeed": ws,
+            "winddirection": wd
+        )}
+    return render_template('index.html', fdata=fdata)
 
 if __name__ == '__main__':
     app.run(debug=True)

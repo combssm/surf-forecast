@@ -12,9 +12,21 @@
   <body>
   <h1>combsvb - Surf Forecast</h1>
   <!-- Surf Forecast div -->
-  {% for k,v in item.items() %}
-      {{k}} : {{v}}<br />
-  {% endfor %}
+  <table>
+    <th>S TURNS SURF REPORT AND FORECAST</th>
+    <tr>
+      <td>Date</td>
+      <td>Swell Height</td>
+      <td>Swell Direction</td>
+      <td>Wind Speed</td>
+      <td>Wind Direction</td>
+    </tr>
+    {% for n in fdata %}
+    <tr>
+      {% for k,v in n.items() %}
+      <td>{{v}}</td>
+    </tr>
+  </table>
 
   </body>
 </html>
