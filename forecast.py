@@ -26,7 +26,7 @@ def home():
             "swelldirection": sd,
             "windspeed": ws,
             "winddirection": wd
-        )}
+        })
     return render_template('index.html', fdata=fdata)
 
 if __name__ == '__main__':
