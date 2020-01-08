@@ -16,18 +16,23 @@
     <th>S TURNS SURF REPORT AND FORECAST</th>
     <tr>
       <td>Date</td>
-      <td>Min Breaking Height</td>
-      <td>Max Breaking Height</td>
-      <td>Swell Height</td>
-      <td>Swell Direction</td>
-      <td>Wind Speed</td>
-      <td>Wind Direction</td>
+      <td>Swell</td>
+      <td>Wind</td>
     </tr>
-    {% for n in fdata %}
+    {% for f in fdata %}
     <tr>
-      {% for k,v in n.items() %}
-      <td>{{v}}</td>
-      {% endfor %}
+      <td>
+        {{ f.timestamp }}
+      </td>
+      <td>
+        {% if f.max_swell_height == f.min_swell_height %}
+          {{ f.max_swell_height }} ft {{ f.swell_direction }}
+        {% else %}
+          {{ f.min_swell_height }}-{{ f.max_swell_height }} ft  {{ f.swell_direction }}
+      </td>
+      <td>
+        {{ f.wind_speed }} {{ f.wind_direction }}
+      </td>
     </tr>
     {% endfor %}
   </table>

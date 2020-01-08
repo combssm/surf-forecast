@@ -1,10 +1,22 @@
 from flask import Flask, render_template
-from plotly.offline import plot
-from plotly.graph_objs import Scatter
 import requests
 import time
 
 app = Flask(__name__)
+
+class Forecast:
+    """
+    Class to hold all forecast data for a given timestamp
+    data: dictionary containing all forecast data from API
+    """
+    def __init__(self, data):
+        self.timestamp = data['timestamp']
+        self.min_swell_height = data['swell']['minBreakingHeight']
+        self.max_swell_height = data['swell']['maxBreakingHeight']
+        self.swell_direction = data['swell']['components']['primary']['compassDirection']
+        self.wind_direction = data['wind']['compassDirection']
+        self.wind_speed = data['wind']['speed']
+
 
 @app.route('/')
 def home():
@@ -16,22 +28,8 @@ def home():
 
     fdata = []
     for i in response:
-        t = i['timestamp']
-        sminh = i['swell']['minBreakingHeight']
-        smaxh = i['swell']['maxBreakingHeight']
-        sh = i['swell']['components']['primary']['height']
-        sd = i['swell']['components']['primary']['compassDirection']
-        ws = i['wind']['speed']
-        wd = i['wind']['compassDirection']
-        fdata.append({
-            "time": time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(t)),
-            "swellminheight": sminh,
-            "swellmaxheight": smaxh,
-            "swellheight": sh,
-            "swelldirection": sd,
-            "windspeed": ws,
-            "winddirection": wd
-        })
+        f = Forecast(i)
+        fdata.append(f)
     return render_template('index.html', fdata=fdata)
 
 if __name__ == '__main__':
