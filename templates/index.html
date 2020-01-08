@@ -29,6 +29,7 @@
           {{ f.max_swell_height }} ft {{ f.swell_direction }}
         {% else %}
           {{ f.min_swell_height }}-{{ f.max_swell_height }} ft  {{ f.swell_direction }}
+        {% endif %}
       </td>
       <td>
         {{ f.wind_speed }} {{ f.wind_direction }}
