@@ -11,7 +11,10 @@
 
   <body>
   <h1>combsvb - Surf Forecast</h1>
-  {{ my_plot_div|safe }}
+  <!-- Surf Forecast div -->
+  {% for k,v in item.items() %}
+      {{k}} : {{v}}<br />
+  {% endfor %}
 
   </body>
 </html>
