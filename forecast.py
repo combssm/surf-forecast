@@ -25,8 +25,8 @@ class Forecast:
 def home():
     """Displays main page"""
     try:
-        s_turns_response = requests.get('http://magicseaweed.com/api/e53638829bea94ae3a45213abb63a7ad/forecast/?spot_id=398&units=us&fields=timestamp,swell.components.primary.*,wind.*,condition.temperature').json()
-        vb_response = requests.get('http://magicseaweed.com/api/e53638829bea94ae3a45213abb63a7ad/forecast/?spot_id=396&units=us&fields=timestamp,swell.components.primary.*,wind.*,condition.temperature').json()
+        s_turns_response = requests.get('http://magicseaweed.com/api/e53638829bea94ae3a45213abb63a7ad/forecast/?spot_id=398&units=us&fields=minBreakingHeight,maxBreakingHeight,timestamp,swell.components.primary.*,wind.*,condition.temperature').json()
+        vb_response = requests.get('http://magicseaweed.com/api/e53638829bea94ae3a45213abb63a7ad/forecast/?spot_id=396&units=us&fields=minBreakingHeight,maxBreakingHeight,timestamp,swell.components.primary.*,wind.*,condition.temperature').json()
     except Exception as e:
         return "<h2>Unable to retrieve swell data: {}</h2>".format(e)
 
