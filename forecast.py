@@ -21,6 +21,9 @@ class Forecast:
         self.temperature = data['condition']['temperature']
 
 
+        
+
+
 @app.route('/')
 def home():
     """Displays main page"""
