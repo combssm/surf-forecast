@@ -18,8 +18,9 @@
       <td>Date</td>
       <td>Swell</td>
       <td>Wind</td>
+      <td>Temperature</td>>
     </tr>
-    {% for f in fdata %}
+    {% for f in s_turns_fdata %}
     <tr>
       <td>
         {{ f.timestamp }}
@@ -34,10 +35,40 @@
       <td>
         {{ f.wind_speed }} {{ f.wind_direction }}
       </td>
+      <td>
+        {{ f.temperature }}&#176; F
+      </td>
     </tr>
     {% endfor %}
-    {{ graph|safe }}
   </table>
-
+  <table>
+    <th>VIRGINIA BEACH, VA SURF REPORT AND FORECAST</th>
+    <tr>
+      <td>Date</td>
+      <td>Swell</td>
+      <td>Wind</td>
+      <td>Temperature</td>>
+    </tr>
+    {% for f in vb_fdata %}
+    <tr>
+      <td>
+        {{ f.timestamp }}
+      </td>
+      <td>
+        {% if f.max_swell_height == f.min_swell_height %}
+          {{ f.max_swell_height }} ft {{ f.swell_direction }}
+        {% else %}
+          {{ f.min_swell_height }}-{{ f.max_swell_height }} ft  {{ f.swell_direction }}
+        {% endif %}
+      </td>
+      <td>
+        {{ f.wind_speed }} {{ f.wind_direction }}
+      </td>
+      <td>
+        {{ f.temperature }}&#176; F
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
   </body>
 </html>

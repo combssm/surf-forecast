@@ -18,23 +18,27 @@ class Forecast:
         self.swell_direction = data['swell']['components']['primary']['compassDirection']
         self.wind_direction = data['wind']['compassDirection']
         self.wind_speed = data['wind']['speed']
+        self.temperature = data['condition']['temperature']
 
 
 @app.route('/')
 def home():
     """Displays main page"""
     try:
-        response = requests.get('http://magicseaweed.com/api/e53638829bea94ae3a45213abb63a7ad/forecast/?spot_id=398&units=us').json()
+        s_turns_response = requests.get('http://magicseaweed.com/api/e53638829bea94ae3a45213abb63a7ad/forecast/?spot_id=398&units=us&fields=timestamp,swell.components.primary.*,wind.*,condition.temperature').json()
+        vb_response = requests.get('http://magicseaweed.com/api/e53638829bea94ae3a45213abb63a7ad/forecast/?spot_id=396&units=us&fields=timestamp,swell.components.primary.*,wind.*,condition.temperature').json()
     except Exception as e:
         return "<h2>Unable to retrieve swell data: {}</h2>".format(e)
 
-    fdata = []
-    for i in response:
+    s_turns_fdata, vb_fdata = [], []
+    for i in s_turns_response:
         f = Forecast(i)
-        fdata.append(f)
+        s_turns_fdata.append(f)
+    for i in vb_response:
+        f = Forecast(i)
+        vb_fdata.append(f)
 
-    graph = plot([Scatter(x=[x.timestamp for x in fdata], y=[y.max_swell_height for y in fdata])], output_type='div')    
-    return render_template('index.html', fdata=fdata, graph=graph)
+    return render_template('index.html', s_turns_fdata=s_turns_fdata, vb_fdata=vb_fdata)
 
 if __name__ == '__main__':
     app.run(debug=True)
