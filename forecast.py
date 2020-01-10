@@ -1,10 +1,10 @@
 from flask import Flask, render_template
 import requests
 import time
-from plotly.offline import plot
-from plotly.graph_objs import Scatter
+
 
 app = Flask(__name__)
+
 
 class Forecast:
     """
@@ -19,9 +19,6 @@ class Forecast:
         self.wind_direction = data['wind']['compassDirection']
         self.wind_speed = data['wind']['speed']
         self.temperature = data['condition']['temperature']
-
-
-        
 
 
 @app.route('/')
@@ -42,6 +39,7 @@ def home():
         vb_fdata.append(f)
 
     return render_template('index.html', s_turns_fdata=s_turns_fdata, vb_fdata=vb_fdata)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
