@@ -1,6 +1,6 @@
 table {
     display: table;
-    border-collapse: collapse;
+    border-collapse: separate;
     border-spacing: 2px;
     border-color: gray;
     border-style: solid;
