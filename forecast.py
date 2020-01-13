@@ -23,7 +23,7 @@ class Forecast:
         self.wind_direction = data['wind']['compassDirection']
         self.wind_speed = data['wind']['speed']
         self.temperature = data['condition']['temperature']
-        self.weather_condition = data['condition']['temperature']
+        self.weather_condition = data['condition']['weather']
 
 
 @app.route('/')
