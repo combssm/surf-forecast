@@ -20,6 +20,7 @@
         <th style="width: 150px">Swell</th>
         <th style="width: 150px">Wind</th>
         <th style="width: 100px">Temperature</th>
+        <th style="width: 30px">Weather</th>
       </tr>
     </thead>
     <tbody>
@@ -40,6 +41,9 @@
       </td>
       <td style="text-align: center">
         {{ f.temperature }}&#176; F
+      </td>
+      <td>
+        <img src="http://cdnimages.magicseaweed.com/30x30/{{ f.weather_condition }}.png"
       </td>
     </tr>
     {% endfor %}

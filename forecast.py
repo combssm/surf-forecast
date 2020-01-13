@@ -5,7 +5,8 @@ import time
 API_KEY = 'e53638829bea94ae3a45213abb63a7ad'
 FIELDS = [
     'swell.minBreakingHeight', 'swell.maxBreakingHeight', 'timestamp',
-    'swell.components.primary.*', 'wind.*,condition.temperature']
+    'swell.components.primary.*', 'wind.*', 'condition.temperature',
+    'condition.weather']
 
 app = Flask(__name__)
 
@@ -22,6 +23,7 @@ class Forecast:
         self.wind_direction = data['wind']['compassDirection']
         self.wind_speed = data['wind']['speed']
         self.temperature = data['condition']['temperature']
+        self.weather_condition = data['condition']['temperature']
 
 
 @app.route('/')
