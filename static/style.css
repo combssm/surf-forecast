@@ -1,7 +1,7 @@
 table {
     display: table;
     border-collapse: separate;
-    border-spacing: 2px;
+    border-spacing: 0px;
     border-color: gray;
     border-style: solid;
     border: 1px
