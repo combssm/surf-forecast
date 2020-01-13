@@ -6,19 +6,23 @@
     <meta name="description" content="Surf Forecast tool written in Python for Virginia Beach, VA and S-Turns, NC">
     <meta name="author" content="Sean Combs">
     <title>combsvb - Surf Forecast</title>
+    <link rel="stylesheet" href="../static/style.css">
   </head>
 
 
   <body>
   <h1>combsvb - Surf Forecast</h1>
+  <h2>5 DAY S-TURNS SURF REPORT</h2>
   <table>
-    <th colspan="4">5 DAY S-TURNS SURF REPORT</th colspan="4">
-    <tr>
-      <td>Date</td>
-      <td>Swell</td>
-      <td>Wind</td>
-      <td>Temperature</td>>
-    </tr>
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Swell</th>
+        <th>Wind</th>
+        <th>Temperature</th>>
+      </tr>
+    </thead>
+    <tbody>
     {% for f in s_turns_fdata %}
     <tr>
       <td>
@@ -39,9 +43,10 @@
       </td>
     </tr>
     {% endfor %}
+    </tbody>
   </table>
+  <h2>5 DAY VIRGINIA BEACH, VA SURF REPORT</h2>
   <table>
-    <th colspan="4">5 DAY VIRGINIA BEACH, VA SURF REPORT</th>
     <tr>
       <td>Date</td>
       <td>Swell</td>
