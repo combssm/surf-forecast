@@ -32,11 +32,11 @@
         {% if f.max_swell_height == f.min_swell_height %}
           {{ f.max_swell_height }} ft{{ f.swell_direction }}
         {% else %}
-          {{ f.min_swell_height }}-{{ f.max_swell_height }} ft  <br />{{ f.swell_direction }}
+          {{ f.min_swell_height }}-{{ f.max_swell_height }}ft {{ f.swell_direction }}
         {% endif %}
       </td>
       <td style="text-align: center">
-        {{ f.wind_speed }}mph{{ f.wind_direction }}
+        {{ f.wind_speed }}mph {{ f.wind_direction }}
       </td>
       <td style="text-align: center">
         {{ f.temperature }}&#176; F
@@ -60,7 +60,7 @@
       </td>
       <td style="text-align: center">
         {% if f.max_swell_height == f.min_swell_height %}
-          {{ f.max_swell_height }} ft {{ f.swell_direction }}
+          {{ f.max_swell_height }}ft {{ f.swell_direction }}
         {% else %}
           {{ f.min_swell_height }}-{{ f.max_swell_height }} ft  {{ f.swell_direction }}
         {% endif %}
