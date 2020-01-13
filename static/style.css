@@ -1,9 +1,10 @@
 table {
     display: table;
-    border-collapse: separate;
-    border-spacing: 5px;
+    border-collapse: collapse;
+    border-spacing: 2px;
     border-color: gray;
-    border: 1px solid #000000
+    border-style: solid;
+    border: 1px
 }
 
 thead {
@@ -47,7 +48,7 @@ td, th {
     vertical-align: inherit;
     border: 1px solid;
     border-left: none;
-    border-right: none
+    border-right: none;
 }
 
 th {
