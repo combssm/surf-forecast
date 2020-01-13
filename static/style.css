@@ -2,7 +2,8 @@ table {
     display: table;
     border-collapse: separate;
     border-spacing: 2px;
-    border-color: gray
+    border-color: gray;
+    border: 1px solid #000000
 }
 
 thead {
