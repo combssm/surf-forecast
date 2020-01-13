@@ -17,9 +17,9 @@
     <thead>
       <tr>
         <th>Date</th>
-        <th>Swell</th>
-        <th>Wind</th>
-        <th>Temperature</th>
+        <th style="width: 300px">Swell</th>
+        <th style="width: 200px">Wind</th>
+        <th style="width: 200px">Temperature</th>
       </tr>
     </thead>
     <tbody>
@@ -28,14 +28,14 @@
       <td>
         {{ f.timestamp }}
       </td>
-      <td style="text-align: center">
+      <td style="width: 250px">
         {% if f.max_swell_height == f.min_swell_height %}
           {{ f.max_swell_height }} ft{{ f.swell_direction }}
         {% else %}
           {{ f.min_swell_height }}-{{ f.max_swell_height }}ft {{ f.swell_direction }}
         {% endif %}
       </td>
-      <td style="text-align: center">
+      <td>
         {{ f.wind_speed }}mph {{ f.wind_direction }}
       </td>
       <td style="text-align: center">
