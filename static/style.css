@@ -60,3 +60,7 @@ caption {
     font-weight: bold;
     text-align: -webkit-center
 }
+
+tbody tr:nth-child(odd) {
+    background: #eee;
+}
