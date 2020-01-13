@@ -39,13 +39,13 @@ colgroup {
 tr {
     display: table-row;
     vertical-align: inherit;
-    border-color: inherit;
-    border: 1px solid #000000
+    border-color: inherit
 }
 
 td, th {
     display: table-cell;
-    vertical-align: inherit
+    vertical-align: inherit;
+    border: 1px solid
 }
 
 th {
