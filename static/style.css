@@ -52,5 +52,6 @@ th {
 
 caption {
     display: table-caption;
+    font-weight: bold;
     text-align: -webkit-center
 }
