@@ -10,7 +10,8 @@ table {
 thead {
     display: table-header-group;
     vertical-align: middle;
-    border-color: inherit
+    border-color: inherit;
+    text-align: left
 }
 
 tbody {
@@ -46,7 +47,7 @@ tr {
 td, th {
     display: table-cell;
     vertical-align: inherit;
-    border: 0.5px solid;
+    border: 1px;
     border-left: none;
     border-right: none;
 }
