@@ -2,9 +2,12 @@ from flask import Flask, render_template
 import requests
 import time
 
+API_KEY = 'e53638829bea94ae3a45213abb63a7ad'
+FIELDS = [
+    'swell.minBreakingHeight', 'swell.maxBreakingHeight', 'timestamp',
+    'swell.components.primary.*', 'wind.*,condition.temperature']
 
 app = Flask(__name__)
-
 
 class Forecast:
     """
@@ -25,8 +28,20 @@ class Forecast:
 def home():
     """Displays main page"""
     try:
-        s_turns_response = requests.get('http://magicseaweed.com/api/e53638829bea94ae3a45213abb63a7ad/forecast/?spot_id=398&units=us&fields=swell.minBreakingHeight,swell.maxBreakingHeight,timestamp,swell.components.primary.*,wind.*,condition.temperature').json()
-        vb_response = requests.get('http://magicseaweed.com/api/e53638829bea94ae3a45213abb63a7ad/forecast/?spot_id=396&units=us&fields=swell.minBreakingHeight,swell.maxBreakingHeight,timestamp,swell.components.primary.*,wind.*,condition.temperature').json()
+        s_turns_response = requests.get(
+            'http://magicseaweed.com/api/{}/forecast/?spot_id={}&units={}&fields={}'.format(
+                API_KEY,
+                "398", # S-Turns
+                "us", 
+                ','.join(FIELDS))
+            ).json()
+        vb_response = requests.get(
+            'http://magicseaweed.com/api/{}/forecast/?spot_id={}&units={}&fields={}'.format(
+                API_KEY,
+                "396", # Virginia Beach
+                "us", 
+                ','.join(FIELDS))
+            ).json()
     except Exception as e:
         return "<h2>Unable to retrieve swell data: {}</h2>".format(e)
 
