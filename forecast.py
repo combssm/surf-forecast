@@ -6,7 +6,7 @@ API_KEY = 'e53638829bea94ae3a45213abb63a7ad'
 FIELDS = [
     'swell.minBreakingHeight', 'swell.maxBreakingHeight', 'timestamp',
     'swell.components.primary.*', 'wind.*', 'condition.temperature',
-    'condition.weather']
+    'condition.weather', 'fadedRating', 'solidRating']
 
 app = Flask(__name__)
 
