@@ -66,6 +66,6 @@ tbody tr:nth-child(odd) {
     background: #eee;
 }
 
-tr:hover { /* th:hover also if you wish */
+tbody tr:hover { /* th:hover also if you wish */
     background: rgb(7, 131, 233);
 }
