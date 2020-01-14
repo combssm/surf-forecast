@@ -25,7 +25,7 @@ class Forecast:
         self.temperature = data['condition']['temperature']
         self.weather_condition = data['condition']['weather']
         self.faded_rating = data['fadedRating']
-        self.solid_rading = data['solidRating']
+        self.solid_rating = data['solidRating']
 
 
 @app.route('/')
