@@ -20,7 +20,7 @@
         <th style="width: 150px">Wind</th>
         <th style="width: 100px">Temperature</th>
         <th style="width: 30px">Weather</th>
-        <th style="width: 90px">Swell Rating</th>
+        <th style="width: 90px">Rating</th>
       </tr>
     </thead>
     <tbody>
@@ -42,10 +42,10 @@
       <td style="text-align: center">
         {{ f.temperature }}&#176; F
       </td>
-      <td>
+      <td style="text-align: center">
         <img src="http://cdnimages.magicseaweed.com/30x30/{{ f.weather_condition }}.png">
       </td>
-      <td>
+      <td style="text-align: center">
         {% for i in range(f.solid_rating) %}
           <img src="http://cdnimages.magicseaweed.com/star_filled.png" />
         {% endfor %}  
