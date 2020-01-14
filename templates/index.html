@@ -13,7 +13,7 @@
   <body>
   <h1>combsvb - Surf Forecast</h1>
   <table>
-    <caption>5 DAY S-TURNS SURF REPORT</caption>
+    <caption>5 DAY VIRGINIA BEACH SURF REPORT</caption>
     <thead>
       <tr>
         <th style="width: 250px">Date</th>
@@ -24,7 +24,7 @@
       </tr>
     </thead>
     <tbody>
-    {% for f in s_turns_fdata %}
+    {% for f in fdata %}
     <tr>
       <td>
         {{ f.timestamp }}
@@ -43,40 +43,11 @@
         {{ f.temperature }}&#176; F
       </td>
       <td>
-        <img src="http://cdnimages.magicseaweed.com/30x30/{{ f.weather_condition }}.png"
+        <img src="http://cdnimages.magicseaweed.com/30x30/{{ f.weather_condition }}.png">
       </td>
     </tr>
     {% endfor %}
     </tbody>
-  </table>
-  <table>
-    <caption>5 DAY VIRGINIA BEACH, VA SURF REPORT</caption>
-    <tr>
-      <td>Date</td>
-      <td>Swell</td>
-      <td>Wind</td>
-      <td>Temperature</td>
-    </tr>
-    {% for f in vb_fdata %}
-    <tr>
-      <td>
-        {{ f.timestamp }}
-      </td>
-      <td style="text-align: center">
-        {% if f.max_swell_height == f.min_swell_height %}
-          {{ f.max_swell_height }}ft {{ f.swell_direction }}
-        {% else %}
-          {{ f.min_swell_height }}-{{ f.max_swell_height }} ft  {{ f.swell_direction }}
-        {% endif %}
-      </td>
-      <td style="text-align: center">
-        {{ f.wind_speed }}mph {{ f.wind_direction }}
-      </td>
-      <td style="text-align: center">
-        {{ f.temperature }}&#176; F
-      </td>
-    </tr>
-    {% endfor %}
   </table>
   </body>
 </html>

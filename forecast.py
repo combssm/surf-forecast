@@ -30,14 +30,7 @@ class Forecast:
 def home():
     """Displays main page"""
     try:
-        s_turns_response = requests.get(
-            'http://magicseaweed.com/api/{}/forecast/?spot_id={}&units={}&fields={}'.format(
-                API_KEY,
-                "398", # S-Turns
-                "us", 
-                ','.join(FIELDS))
-            ).json()
-        vb_response = requests.get(
+        response = requests.get(
             'http://magicseaweed.com/api/{}/forecast/?spot_id={}&units={}&fields={}'.format(
                 API_KEY,
                 "396", # Virginia Beach
@@ -47,15 +40,12 @@ def home():
     except Exception as e:
         return "<h2>Unable to retrieve swell data: {}</h2>".format(e)
 
-    s_turns_fdata, vb_fdata = [], []
-    for i in s_turns_response:
+    fdata = []
+    for i in response:
         f = Forecast(i)
-        s_turns_fdata.append(f)
-    for i in vb_response:
-        f = Forecast(i)
-        vb_fdata.append(f)
+        fdata.append(f)
 
-    return render_template('index.html', s_turns_fdata=s_turns_fdata, vb_fdata=vb_fdata)
+    return render_template('index.html', fdata=fdata)
 
 
 if __name__ == '__main__':
