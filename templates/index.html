@@ -13,7 +13,6 @@
 
   <body>
   <table>
-    <caption>5 DAY VIRGINIA BEACH SURF REPORT</caption>
     <thead>
       <tr>
         <th style="width: 250px">Date</th>
@@ -28,8 +27,8 @@
       <tbody class="labels">
         <tr>
           <td colspan="6">
-            <label for="surfreport">5 DAY VIRGINIA BEACH SURF REPORT</label>
-            <input type="checkbox" name="surfreport" id="surfreport" data-toggle="toggle">
+            <label for="accounting">Accounting</label>
+            <input type="checkbox" name="accounting" id="accounting" data-toggle="toggle">
           </td>
         </tr>
       </tbody>
@@ -39,7 +38,7 @@
           <td>
             {{ f.timestamp }}
           </td>
-          <td style="width: 250px">
+          <td>
             {% if f.max_swell_height == f.min_swell_height %}
               {{ f.max_swell_height }}ft {{ f.swell_direction }}
             {% else %}
@@ -49,10 +48,10 @@
           <td>
             {{ f.wind_speed }}mph {{ f.wind_direction }}
           </td>
-          <td style="text-align: center">
+          <td>
             {{ f.temperature }}&#176; F
           </td>
-          <td style="text-align: center">
+          <td>
             <img src="http://cdnimages.magicseaweed.com/30x30/{{ f.weather_condition }}.png">
           </td>
           <td>
