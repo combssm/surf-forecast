@@ -1,17 +1,21 @@
-th {
-    font-weight: bold
-}
+table { 
+	width: 750px; 
+	border-collapse: collapse; 
+	margin:50px auto;
+	}
 
-tbody tr:nth-child(odd) {
-    background: #eee;
-}
-tbody tr:nth-child(even) {
-    background: #fff;
-}
+th { 
+	background: #3498db; 
+	color: white; 
+	font-weight: bold; 
+	}
 
-tbody tr:hover { /* th:hover also if you wish */
-    background: rgb(7, 131, 233);
-}
+td, th { 
+	padding: 10px; 
+	border: 1px solid #ccc; 
+	text-align: left; 
+	font-size: 18px;
+	}
 
 .labels tr td {
 	background-color: #2cc16a;
@@ -22,6 +26,7 @@ tbody tr:hover { /* th:hover also if you wish */
 .label tr td label {
 	display: block;
 }
+
 
 [data-toggle="toggle"] {
 	display: none;
