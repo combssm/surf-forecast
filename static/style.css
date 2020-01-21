@@ -73,3 +73,17 @@ tbody tr:hover { /* th:hover also if you wish */
 body {
     background: #0058B0;
 }
+
+.labels tr td {
+	background-color: #2cc16a;
+	font-weight: bold;
+	color: #fff;
+}
+
+.label tr td label {
+	display: block;
+}
+
+[data-toggle="toggle"] {
+	display: none;
+}

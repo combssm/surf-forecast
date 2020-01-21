@@ -24,37 +24,47 @@
       </tr>
     </thead>
     <tbody>
-    {% for f in fdata %}
-    <tr>
-      <td>
-        {{ f.timestamp }}
-      </td>
-      <td style="width: 250px">
-        {% if f.max_swell_height == f.min_swell_height %}
-          {{ f.max_swell_height }}ft {{ f.swell_direction }}
-        {% else %}
-          {{ f.min_swell_height }}-{{ f.max_swell_height }}ft {{ f.swell_direction }}
-        {% endif %}
-      </td>
-      <td>
-        {{ f.wind_speed }}mph {{ f.wind_direction }}
-      </td>
-      <td style="text-align: center">
-        {{ f.temperature }}&#176; F
-      </td>
-      <td style="text-align: center">
-        <img src="http://cdnimages.magicseaweed.com/30x30/{{ f.weather_condition }}.png">
-      </td>
-      <td>
-        {% for i in range(f.solid_rating) %}
-          <img src="http://cdnimages.magicseaweed.com/star_filled.png" />
-        {% endfor %}  
-        {% for i in range(f.faded_rating) %}
-          <img src="http://cdnimages.magicseaweed.com/star_empty.png" />
+      <tbody class="labels">
+        <tr>
+          <td colspan="6">
+            <label for="surf-report">5 DAY VIRGINIA BEACH SURF REPORT</label>
+            <input type="checkbox" name="surf-report" id="surf-report" data-toggle="toggle">
+          </td>
+        </tr>
+      </tbody>
+      <tbody class="hide">
+        {% for f in fdata %}
+        <tr>
+          <td>
+            {{ f.timestamp }}
+          </td>
+          <td style="width: 250px">
+            {% if f.max_swell_height == f.min_swell_height %}
+              {{ f.max_swell_height }}ft {{ f.swell_direction }}
+            {% else %}
+              {{ f.min_swell_height }}-{{ f.max_swell_height }}ft {{ f.swell_direction }}
+            {% endif %}
+          </td>
+          <td>
+            {{ f.wind_speed }}mph {{ f.wind_direction }}
+          </td>
+          <td style="text-align: center">
+            {{ f.temperature }}&#176; F
+          </td>
+          <td style="text-align: center">
+            <img src="http://cdnimages.magicseaweed.com/30x30/{{ f.weather_condition }}.png">
+          </td>
+          <td>
+            {% for i in range(f.solid_rating) %}
+              <img src="http://cdnimages.magicseaweed.com/star_filled.png" />
+            {% endfor %}  
+            {% for i in range(f.faded_rating) %}
+              <img src="http://cdnimages.magicseaweed.com/star_empty.png" />
+            {% endfor %}
+          </td>
+        </tr>
         {% endfor %}
-      </td>
-    </tr>
-    {% endfor %}
+      </tbody>
     </tbody>
   </table>
   <a href="http://magicseaweed.com"><img src="https://im-1-uk.msw.ms/msw_powered_by.png"></a>
