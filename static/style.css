@@ -1,54 +1,5 @@
-table {
-    border-collapse: separate;
-    border-spacing: 0px;
-}
-
-thead {
-    display: table-header-group;
-    vertical-align: middle;
-    border-color: inherit;
-    text-align: left
-}
-
-tfoot {
-    display: table-footer-group;
-    vertical-align: middle;
-    border-color: inherit
-}
-
-table > tr {
-    vertical-align: middle;
-}
-
-col {
-    display: table-column
-}
-
-colgroup {
-    display: table-column-group
-}
-
-tr {
-    display: table-row;
-    vertical-align: inherit;
-    border-color: inherit
-}
-
-td, th {
-    vertical-align: inherit;
-    border: 1px;
-    border-left: none;
-    border-right: none;
-}
-
 th {
     font-weight: bold
-}
-
-caption {
-    display: table-caption;
-    font-weight: bold;
-    text-align: -webkit-center
 }
 
 tbody tr:nth-child(odd) {
@@ -60,10 +11,6 @@ tbody tr:nth-child(even) {
 
 tbody tr:hover { /* th:hover also if you wish */
     background: rgb(7, 131, 233);
-}
-
-body {
-    background: #0058B0;
 }
 
 .labels tr td {
