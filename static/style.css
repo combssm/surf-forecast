@@ -1,5 +1,4 @@
 table {
-    display: table;
     border-collapse: separate;
     border-spacing: 0px;
 }
@@ -9,12 +8,6 @@ thead {
     vertical-align: middle;
     border-color: inherit;
     text-align: left
-}
-
-tbody {
-    display: table-row-group;
-    vertical-align: middle;
-    border-color: inherit
 }
 
 tfoot {
@@ -42,7 +35,6 @@ tr {
 }
 
 td, th {
-    display: table-cell;
     vertical-align: inherit;
     border: 1px;
     border-left: none;
