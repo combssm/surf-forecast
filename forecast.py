@@ -26,6 +26,7 @@ class Forecast:
         self.weather_condition = data['condition']['weather']
         self.faded_rating = data['fadedRating']
         self.solid_rating = data['solidRating']
+        self.day = time.strftime('%A', time.localtime(data['timestamp']))
 
 
 @app.route('/')
