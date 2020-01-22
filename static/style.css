@@ -25,7 +25,8 @@ td, th {
 
 .label tr td label {
 	display: block;
-	width: 100%;
+	width: 400px;
+	border: 1px solid #000;
 }
 
 [data-toggle="toggle"] {
