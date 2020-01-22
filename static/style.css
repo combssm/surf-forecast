@@ -2,19 +2,19 @@ table {
 	width: 750px; 
 	border-collapse: collapse; 
 	margin:50px auto;
-	}
+}
 
 th { 
 	background: #3498db; 
 	color: white; 
 	font-weight: bold; 
-	}
+}
 
 td, th { 
-	padding: 10px; 
-	border: 1px solid #ccc; 
+	padding: 3px; 
+	border: 0px solid #ccc; 
 	text-align: left; 
-	font-size: 18px;
+	font-size: 14px;
 	}
 
 .labels tr td {
@@ -30,4 +30,15 @@ td, th {
 
 [data-toggle="toggle"] {
 	display: none;
+}
+
+tbody tr:nth-child(odd) {
+    background: #eee;
+}
+tbody tr:nth-child(even) {
+    background: #fff;
+}
+
+tbody tr:hover { /* th:hover also if you wish */
+    background: rgb(7, 131, 233);
 }
