@@ -48,7 +48,7 @@ def home():
         f = Forecast(i)
         if fdata.get(f.day) == None:
             fdata[f.day] = []
-        fdata.append(f)
+        fdata[f.day].append(f)
 
     return render_template('index.html', fdata=fdata)
 
