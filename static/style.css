@@ -21,12 +21,13 @@ td, th {
 	background-color: #2cc16a;
 	font-weight: bold;
 	color: #fff;
+	border-top: 1px solid #000; 
+	border-bottom: 1px solid #000";
 }
 
 .label tr td label {
 	display: block;
 }
-
 
 [data-toggle="toggle"] {
 	display: none;
