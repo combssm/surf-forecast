@@ -24,8 +24,7 @@ td, th {
 }
 
 .label tr td label {
-	display: block;
-	background-color: #000;
+	display: table-cell;
 }
 
 [data-toggle="toggle"] {
