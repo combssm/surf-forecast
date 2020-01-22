@@ -23,17 +23,18 @@
         <th style="width: 90px">Rating</th>
       </tr>
     </thead>
+    {% for day, ddata in fdata.items() %}
     <tbody>
       <tbody class="labels">
         <tr>
           <td colspan="6">
-            <label for="accounting">Accounting</label>
-            <input type="checkbox" name="accounting" id="accounting" data-toggle="toggle">
+            <label for="{{ day }}">{{ day }}</label>
+            <input type="checkbox" name="{{ day }}" id="{{ day }}" data-toggle="toggle">
           </td>
         </tr>
       </tbody>
       <tbody class="hide">
-        {% for f in fdata %}
+        {% for f in ddata %}
         <tr>
           <td>
             {{ f.timestamp }}
@@ -66,6 +67,7 @@
         {% endfor %}
       </tbody>
     </tbody>
+    {% endfor %}
   </table>
   <a href="http://magicseaweed.com"><img src="https://im-1-uk.msw.ms/msw_powered_by.png"></a>
   <script type="text/javascript" src="../surf-forecast/static/scripts.js"></script>

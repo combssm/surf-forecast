@@ -43,9 +43,11 @@ def home():
     except Exception as e:
         return "<h2>Unable to retrieve swell data: {}</h2>".format(e)
 
-    fdata = []
+    fdata = {}
     for i in response:
         f = Forecast(i)
+        if fdata.get(f.day) == None:
+            fdata[f.day] = []
         fdata.append(f)
 
     return render_template('index.html', fdata=fdata)
