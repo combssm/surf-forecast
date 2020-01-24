@@ -15,10 +15,8 @@ td, th {
 	border: 0px solid #ccc; 
 	text-align: left; 
 	font-size: 14px;
-	padding-left: 15px;
 	padding-right: 15px;
-	padding-top: 1px; 
-	padding-bottom: 1px; 
+	padding-top: 3px; 
 }
 
 .labels tr td {
