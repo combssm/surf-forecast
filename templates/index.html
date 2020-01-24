@@ -52,10 +52,10 @@
           </td>
           <td style="text-align: center;">
             {{ f.temperature }}&#176; F
-          </td style="text-align: center;">
-          <td style="text-align: center;">
+          </td>
+          <td>
             <img src="../surf-forecast/static/img/30x30/{{ f.weather_condition }}.png">
-          </td style="text-align: center;">
+          </td>
           <td>
             {% for i in range(f.solid_rating) %}
               <img src="../surf-forecast/static/img/star_filled.png" />
