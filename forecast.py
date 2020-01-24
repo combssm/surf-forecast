@@ -16,7 +16,7 @@ class Forecast:
     data: dictionary containing all forecast data from API
     """
     def __init__(self, data):
-        self.timestamp = time.strftime('%a %_m/%d %l:%M%P', time.localtime(data['timestamp']))
+        self.timestamp = time.strftime('%l%P', time.localtime(data['timestamp']))
         self.min_swell_height = data['swell']['minBreakingHeight']
         self.max_swell_height = data['swell']['maxBreakingHeight']
         self.swell_direction = data['swell']['components']['primary']['compassDirection']
@@ -26,7 +26,7 @@ class Forecast:
         self.weather_condition = data['condition']['weather']
         self.faded_rating = data['fadedRating']
         self.solid_rating = data['solidRating']
-        self.day = time.strftime('%A', time.localtime(data['timestamp']))
+        self.day = time.strftime('%A %_m/%d', time.localtime(data['timestamp']))
 
 
 @app.route('/')
