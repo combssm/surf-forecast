@@ -12,12 +12,13 @@ th {
 }
 
 td, th { 
-	padding: 3px; 
-	border: 1px solid #ccc; 
+	border: 0px solid #ccc; 
 	text-align: left; 
 	font-size: 14px;
 	padding-left: 15px;
-	padding-right: 6px;
+	padding-right: 15px;
+	padding-top: 1px; 
+	padding-bottom: 1px; 
 }
 
 .labels tr td {
