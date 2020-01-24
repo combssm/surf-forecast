@@ -16,7 +16,7 @@ class Forecast:
     data: dictionary containing all forecast data from API
     """
     def __init__(self, data):
-        self.timestamp = time.strftime('%l%P', time.localtime(data['timestamp']))
+        self.hour = time.strftime('%l%P', time.localtime(data['timestamp']))
         self.min_swell_height = data['swell']['minBreakingHeight']
         self.max_swell_height = data['swell']['maxBreakingHeight']
         self.swell_direction = data['swell']['components']['primary']['compassDirection']

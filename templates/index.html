@@ -15,7 +15,7 @@
   <table>
     <thead>
       <tr>
-        <th style="width: 250px">Date</th>
+        <th style="width: 90px">Date</th>
         <th style="width: 150px">Swell</th>
         <th style="width: 150px">Wind</th>
         <th style="width: 100px">Temperature</th>
@@ -37,7 +37,7 @@
         {% for f in ddata %}
         <tr>
           <td>
-            {{ f.timestamp }}
+            {{ f.hour }}
           </td>
           <td>
             {% if f.max_swell_height == f.min_swell_height %}
