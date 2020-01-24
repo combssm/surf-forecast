@@ -2,7 +2,7 @@ table {
 	width: auto; 
 	border-collapse: collapse; 
 	margin:50px auto;
-	border: 1px solid #ccc;
+	border: 0px solid #ccc;
 }
 
 th { 
@@ -17,14 +17,15 @@ td, th {
 	font-size: 14px;
 	padding-right: 15px;
 	padding-left: 15px;
-	padding-top: 8px; 
+	padding-top: 8px;
+	padding-bottom: 8px;
 }
 
 .labels tr td {
 	background-color: #2cc16a;
 	font-weight: bold;
 	color: #fff;
-	font-size: 16px;
+	font-size: 14px;
 }
 
 .label tr td label {
