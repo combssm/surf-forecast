@@ -16,8 +16,9 @@ td, th {
 	border: 1px solid #ccc; 
 	text-align: left; 
 	font-size: 14px;
-	text-align: center;
-	}
+	padding-left: 6px;
+	padding-right: 6px;
+}
 
 .labels tr td {
 	background-color: #2cc16a;
