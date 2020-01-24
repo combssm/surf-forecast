@@ -2,6 +2,7 @@ table {
 	width: 750px; 
 	border-collapse: collapse; 
 	margin:50px auto;
+	border: 1px solid #ccc;
 }
 
 th { 
@@ -25,7 +26,6 @@ td, th {
 
 .label tr td label {
 	display: block;
-	color: #000;
 }
 
 [data-toggle="toggle"] {
