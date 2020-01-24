@@ -44,5 +44,6 @@ tbody tr:nth-child(even) {
 }
 
 tbody tr:hover { /* th:hover also if you wish */
-    background: rgb(7, 131, 233);
+	/* background: rgb(7, 131, 233); */
+	border: 1px solid 000;
 }
