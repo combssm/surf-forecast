@@ -48,8 +48,8 @@ tbody tr:nth-child(even) {
     background: #fff;
 }
 
-tfoot {
-    display: block;
+tfoot img{
+	display: block;
     margin-left: auto;
     margin-right: auto;
 }
