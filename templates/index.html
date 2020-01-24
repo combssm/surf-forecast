@@ -53,14 +53,14 @@
             {{ f.temperature }}&#176; F
           </td style="text-align: center;">
           <td style="text-align: center;">
-            <img src="http://cdnimages.magicseaweed.com/30x30/{{ f.weather_condition }}.png">
+            <img src="../surf-forecast/img/30x30/{{ f.weather_condition }}.png">
           </td style="text-align: center;">
           <td>
             {% for i in range(f.solid_rating) %}
-              <img src="http://cdnimages.magicseaweed.com/star_filled.png" />
+              <img src="../surf-forecast/img/star_filled.png" />
             {% endfor %}  
             {% for i in range(f.faded_rating) %}
-              <img src="http://cdnimages.magicseaweed.com/star_empty.png" />
+              <img src="../surf-forecast/img/star_empty.png" />
             {% endfor %}
           </td>
         </tr>
