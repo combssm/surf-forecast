@@ -5,6 +5,11 @@ table {
 	border: 0px solid #ccc;
 }
 
+caption {
+	color: #000;
+	font-weight: bold;
+}
+
 th { 
 	background: #3498db; 
 	color: white; 
@@ -41,6 +46,10 @@ tbody tr:nth-child(odd) {
 }
 tbody tr:nth-child(even) {
     background: #fff;
+}
+
+tfoot {
+	text-align: center;
 }
 
 tbody tr:hover { /* th:hover also if you wish */
