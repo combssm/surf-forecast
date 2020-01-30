@@ -1,6 +1,8 @@
 from flask import Flask, render_template
 import requests
 import time
+from plotly.graph_objs import Scatter
+from plotly.offline import plot
 
 API_KEY = 'e53638829bea94ae3a45213abb63a7ad'
 FIELDS = [
@@ -16,10 +18,12 @@ class Forecast:
     data: dictionary containing all forecast data from API
     """
     def __init__(self, data):
+        self.timestamp = data['timestamp']
         self.hour = time.strftime('%l%P', time.localtime(data['timestamp']))
         self.min_swell_height = data['swell']['minBreakingHeight']
         self.max_swell_height = data['swell']['maxBreakingHeight']
         self.swell_direction = data['swell']['components']['primary']['compassDirection']
+        self.primary_height = data['swell']['components']['primary']['height']
         self.wind_direction = data['wind']['compassDirection']
         self.wind_speed = data['wind']['speed']
         self.temperature = data['condition']['temperature']
@@ -44,13 +48,19 @@ def home():
         return "<h2>Unable to retrieve swell data: {}</h2>".format(e)
 
     fdata = {}
+    x = []
+    y = []
     for i in response:
         f = Forecast(i)
+        x.append(f.timestamp)
+        y.append(f.primary_height)
         if fdata.get(f.day) == None:
             fdata[f.day] = []
         fdata[f.day].append(f)
 
-    return render_template('index.html', fdata=fdata)
+    my_plot_div = plot([Scatter(x=x, y=y)], output_type='div')
+
+    return render_template('index.html', fdata=fdata, my_plot_div=my_plot_div)
 
 
 if __name__ == '__main__':
