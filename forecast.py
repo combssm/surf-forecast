@@ -3,6 +3,7 @@ import requests
 import time
 from plotly.graph_objs import Scatter
 from plotly.offline import plot
+from datetime import datetime
 
 API_KEY = 'e53638829bea94ae3a45213abb63a7ad'
 FIELDS = [
@@ -52,7 +53,7 @@ def home():
     y = []
     for i in response:
         f = Forecast(i)
-        x.append(f.timestamp)
+        x.append(datetime.fromtimestamp(f.timestamp))
         y.append(f.primary_height)
         if fdata.get(f.day) == None:
             fdata[f.day] = []
