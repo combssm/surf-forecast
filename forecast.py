@@ -59,7 +59,7 @@ def home():
             fdata[f.day] = []
         fdata[f.day].append(f)
 
-    my_plot_div = plot([Scatter(x=x, y=y)], output_type='div')
+    my_plot_div = plot([Scatter(x=x, y=y)], output_type='div', "layout": {"title": {"text": "A Bar Chart"}})
 
     return render_template('index.html', fdata=fdata, my_plot_div=my_plot_div)
 
