@@ -4,6 +4,7 @@ import dash_html_components as html
 import requests
 import plotly.graph_objs as go
 import time
+from datetime import datetime
 
 API_KEY = 'e53638829bea94ae3a45213abb63a7ad'
 FIELDS = [
@@ -32,7 +33,7 @@ app.layout = html.Div([
             'data': [
                 # primary
                 go.Scatter(
-                    x = [f['timestamp'] for f in response],
+                    x = [datetime.fromtimestamp(f['timestamp'] for f in response],
                     y = [f['swell']['components']['primary']['height'] for f in response],
                     mode = 'lines+markers',
                     name = 'primary'
