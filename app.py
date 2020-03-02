@@ -12,6 +12,7 @@ FIELDS = [
     'condition.weather', 'fadedRating', 'solidRating']
 
 app = dash.Dash()
+server = app.server
 
 try:
     response = requests.get(
