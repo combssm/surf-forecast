@@ -1,32 +1,51 @@
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
+import requests
+import plotly.graph_objs as go
+import time
 
-external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
+API_KEY = 'e53638829bea94ae3a45213abb63a7ad'
+FIELDS = [
+    'swell.minBreakingHeight', 'swell.maxBreakingHeight', 'timestamp',
+    'swell.components.primary.*', 'wind.*', 'condition.temperature',
+    'condition.weather', 'fadedRating', 'solidRating']
 
-app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
-server = app.server
+app = dash.Dash()
 
-app.layout = html.Div(children=[
-    html.H1(children='Hello Dash'),
+try:
+    response = requests.get(
+        'http://magicseaweed.com/api/{}/forecast/?spot_id={}&units={}&fields={}'.format(
+            API_KEY,
+            "396", # Virginia Beach
+            "us", 
+            ','.join(FIELDS))
+        ).json()
+except Exception as e:
+    print("<h2>Unable to retrieve swell data: {}</h2>".format(e))
 
-    html.Div(children='''
-        Dash: A web application framework for Python.
-    '''),
-
+app.layout = html.Div([
     dcc.Graph(
-        id='example-graph',
+        id='surf-forecast',
         figure={
             'data': [
-                {'x': [1, 2, 3], 'y': [4, 1, 2], 'type': 'bar', 'name': 'SF'},
-                {'x': [1, 2, 3], 'y': [2, 4, 5], 'type': 'bar', 'name': u'Montréal'},
+                # primary
+                go.Scatter(
+                    x = [f['timestamp'] for f in response],
+                    y = [f['swell']['components']['primary']['height'] for f in response],
+                    mode = 'lines+markers',
+                    name = 'primary'
+                )
             ],
-            'layout': {
-                'title': 'Dash Data Visualization'
-            }
+            'layout': go.Layout(
+                title = 'Surf Forecast',
+                xaxis = {'title': 'Date'},
+                yaxis = {'title': 'Wave Height'},
+                hovermode='closest'
+            )
         }
     )
 ])
 
 if __name__ == '__main__':
-    app.run_server(debug=True)
+    app.run_server()
