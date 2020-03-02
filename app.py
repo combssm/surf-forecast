@@ -33,7 +33,7 @@ app.layout = html.Div([
             'data': [
                 # primary
                 go.Scatter(
-                    x = [datetime.fromtimestamp(f['timestamp'] for f in response],
+                    x = [datetime.fromtimestamp(f['timestamp']) for f in response],
                     y = [f['swell']['components']['primary']['height'] for f in response],
                     mode = 'lines+markers',
                     name = 'primary'
