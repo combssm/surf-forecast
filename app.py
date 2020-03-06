@@ -11,7 +11,7 @@ import json
 API_KEY = 'e53638829bea94ae3a45213abb63a7ad'
 FIELDS = [
     'swell.minBreakingHeight', 'swell.maxBreakingHeight', 'timestamp',
-    'swell.components.primary.*', 'wind.*', 'condition.temperature',
+    'swell.components.*', 'wind.*', 'condition.temperature',
     'condition.weather', 'fadedRating', 'solidRating']
 
 app = dash.Dash()
@@ -36,16 +36,26 @@ app.layout = html.Div([
                 # primary
                 go.Scatter(
                     x = [datetime.fromtimestamp(f['timestamp']) for f in response],
-                    y = [f['swell']['components']['primary']['height'] for f in response],
-                    customdata=[{
-                        'temp': t['condition']['temperature'],
-                        'solidRating': t['solidRating'],
-                        'wind_speed': t['wind']['speed'],
-                        'wind_direction': t['wind']['direction'],
-                        'wind_compass_direction': t['wind']['compassDirection']}
-                         for t in response],
+                    y = [f['swell']['components']['primary']['height'] if f['swell']['components'].get('primary') else 'null' for f in response],
+                    customdata=response,
                     mode = 'lines+markers',
                     name = 'primary'
+                ),
+                # secondary
+                go.Scatter(
+                    x = [datetime.fromtimestamp(f['timestamp']) for f in response],
+                    y = [f['swell']['components']['secondary']['height'] if f['swell']['components'].get('secondary') else 'null' for f in response],
+                    customdata=response,
+                    mode = 'lines+markers',
+                    name = 'secondary'
+                ),
+                # secondary
+                go.Scatter(
+                    x = [datetime.fromtimestamp(f['timestamp']) for f in response],
+                    y = [f['swell']['components']['tertiary']['height'] if f['swell']['components'].get('tertiary') else 'null' for f in response],
+                    customdata=response,
+                    mode = 'lines+markers',
+                    name = 'tertiary'
                 )
             ],
             'layout': go.Layout(
@@ -56,8 +66,43 @@ app.layout = html.Div([
             )
         }
     ),
+    html.Div([
+        html.H1(id='date'),
+        html.H2(id='swell-size'),
+        html.H2(id='wind-speed')
+    ]),
     html.Pre(id='hover-data', style={'paddingTop':35})
 ])
+
+# TODO: Set Default Values for elements
+# TODO: Multiple Outputs
+# TODO: Update Forecast-detail on Click
+# TODO: Customize Data in Hoverbox
+
+@app.callback(Output('date', 'children'), [Input('surf-forecast', 'hoverData')])
+def update_date(hoverData):
+    date = datetime.fromtimestamp(hoverData['points'][0]['customdata']['timestamp'])
+    return date
+
+
+@app.callback(Output('swell-size', 'children'), [Input('surf-forecast', 'hoverData')])
+def update_swell_size(hoverData):
+    min = hoverData['points'][0]['customdata']['swell']['minBreakingHeight']
+    max = hoverData['points'][0]['customdata']['swell']['maxBreakingHeight']
+    if min == max:
+        swell = "{}ft".format(min)
+    else:
+        swell = "{}-{}ft".format(min, max)
+    return swell
+
+
+@app.callback(Output('wind-speed', 'children'), [Input('surf-forecast', 'hoverData')])
+def update_swell_size(hoverData):
+    speed = hoverData['points'][0]['customdata']['wind']['speed']
+    direction = hoverData['points'][0]['customdata']['wind']['compassDirection']
+    wind = "{}mph {}".format(speed, direction)
+    return wind
+
 
 @app.callback(Output('hover-data', 'children'), [Input('surf-forecast', 'hoverData')])
 def update_hoverdata(hoverData):
