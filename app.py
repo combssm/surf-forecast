@@ -9,6 +9,11 @@ import dash_core_components as dcc
 import dash_html_components as html
 import plotly.graph_objs as go
 
+# TODO: Set Default Values for elements
+# TODO: Multiple Outputs
+# TODO: Update Forecast-detail on Click
+# TODO: Customize Data in Hoverbox
+
 
 API_KEY = 'e53638829bea94ae3a45213abb63a7ad'
 FIELDS = [
@@ -69,41 +74,17 @@ app.layout = html.Div([
             )
         }
     ),
-    html.Div([
-        html.Table([
-            html.Tr(
-                html.Td(id='date',colSpan='3',style={'textAlign': 'center'})
-            ),
-            html.Tr([
-                html.Td(id='swell-data', style={'width': '33%'}),
-                html.Td(id='tide-data', style={'width': '33%'}),
-                html.Td(id='weather-data', style={'width': '33%'})
-            ])
-        ], style={'border': '1px solid black',
-                  'width': '50%',
-                  'display': 'block',
-                  'margin-left': 'auto',
-                  'margin-right': 'auto',
-                  })
-    ]),
-    html.Pre(id='fake-forecast', style={'paddingTop':35}),
+    html.Div(id='forecast-table'),
     html.Pre(id='hover-data', style={'paddingTop':35})
 ], style={'align': 'center'})
 
 
-# TODO: Set Default Values for elements
-# TODO: Multiple Outputs
-# TODO: Update Forecast-detail on Click
-# TODO: Customize Data in Hoverbox
+@app.callback(Output('forecast-table', 'children'), [Input('surf-forecast', 'hoverData')])
+def update_forecast_table(hoverData):
+    if not hoverData:
+        return "Hover over a point"
 
-@app.callback(Output('date', 'children'), [Input('surf-forecast', 'hoverData')])
-def update_date(hoverData):
-    date = datetime.fromtimestamp(hoverData['points'][0]['customdata']['timestamp'])
-    return datetime.strftime(date, "%B %d, %Y %I:%M%p")
-
-
-@app.callback(Output('swell-data', 'children'), [Input('surf-forecast', 'hoverData')])
-def update_swell_size(hoverData):
+    # Generate swell size format string
     min = hoverData['points'][0]['customdata']['swell']['minBreakingHeight']
     max = hoverData['points'][0]['customdata']['swell']['maxBreakingHeight']
     if min == max:
@@ -111,38 +92,66 @@ def update_swell_size(hoverData):
     else:
         swell_size = "{}-{}ft".format(min, max)
 
-    primary_swell = str(hoverData['points'][0]['customdata']['swell']['components']['primary']['height']) + " " + \
-                    str(hoverData['points'][0]['customdata']['swell']['components']['primary']['compassDirection']) + " @ " + \
-                    str(hoverData['points'][0]['customdata']['swell']['components']['primary']['period']) + "s"
-
-    return html.Pre("""Swell Info
-Size:      {}
-Primary:   {}
-Secondary: {}
-Tertiary:  {}""".format(swell_size, primary_swell, "1.3 ESE", "1.2 SSW"))
-
-
-@app.callback(Output('weather-data', 'children'), [Input('surf-forecast', 'hoverData')])
-def update_wind_size(hoverData):
+    # Generate wind speed format string
     speed = hoverData['points'][0]['customdata']['wind']['speed']
     direction = hoverData['points'][0]['customdata']['wind']['compassDirection']
     wind = "{}mph {}".format(speed, direction)
-    return wind
 
+    # Generate swell stats
+    primary_swell = str(hoverData['points'][0]['customdata']['swell']['components']['primary']['height']) + " " + \
+                str(hoverData['points'][0]['customdata']['swell']['components']['primary']['compassDirection']) + " @ " + \
+                str(hoverData['points'][0]['customdata']['swell']['components']['primary']['period']) + "s"
 
-@app.callback(Output('fake-forecast', 'children'), [Input('surf-forecast', 'hoverData')])
-def update_fake_forecast(hoverData):
-    fake_forecast = '''|----------------------------------------------------------------------------------------------|
-|                                     March 07, 2020 TIME?                                     |
-|  Swell                                    Tides                           Weather            |
-|  Size:      2-3 ft              Low:    3:00am/3:30pm                 Wind:        8 mph SW  |
-|  Primary:   4.5 ENE             High:   9:00am/9:45pm                 Temperature: 61F       |
-|  Secondary: 3.1 SSW                                                   Feels Like:  54F       |
-|  Tertiary:  0.2 SE                                                    Condition:   Cloudy    |
-|----------------------------------------------------------------------------------------------|
-'''
-    return fake_forecast
+    try:
+        secondary_swell = str(hoverData['points'][0]['customdata']['swell']['components']['secondary']['height']) + " " + \
+                        str(hoverData['points'][0]['customdata']['swell']['components']['secondary']['compassDirection']) + " @ " + \
+                        str(hoverData['points'][0]['customdata']['swell']['components']['secondary']['period']) + "s"
+    except Exception:
+        secondary_swell = ""
+    try:
+        tertiary_swell = str(hoverData['points'][0]['customdata']['swell']['components']['tertiary']['height']) + " " + \
+                        str(hoverData['points'][0]['customdata']['swell']['components']['tertiary']['compassDirection']) + " @ " + \
+                        str(hoverData['points'][0]['customdata']['swell']['components']['tertiary']['period']) + "s"                
+    except Exception:
+        tertiary_swell = ""
 
+    table = html.Table([
+        # Date Header
+        html.Thead(
+            datetime.strftime(
+                datetime.fromtimestamp(
+                    hoverData['points'][0]['customdata']['timestamp']), 
+                    "%B %d, %Y %I:%M%p"
+                    ), style={'textAlign': 'center'}
+                ),
+        # Column Headers
+        html.Tr([
+            html.Td("Swell Data"),
+            html.Td("Tide Data"),
+            html.Td("Weather Data")
+        ]),
+        html.Tr([
+            html.Td("Swell Size: {}".format(swell_size)),
+            html.Td("High Tides: {}/{}".format("TBD", "TBD")),
+            html.Td("Wind: {}".format(wind))
+        ]),
+        html.Tr([
+            html.Td("Primary Swell: {}".format(primary_swell)),
+            html.Td("Low Tides: {}/{}".format("TBD", "TBD")),
+            html.Td("Temperature: {}".format(hoverData['points'][0]['customdata']['condition']['temperature']))
+        ]),
+        html.Tr([
+            html.Td("Secondary Swell: {}".format(secondary_swell)),
+            html.Td(""),
+            html.Td("Feels Like: {}".format(hoverData['points'][0]['customdata']['wind']['chill']))
+        ]),
+        html.Tr([
+            html.Td("Tertiary Swell: {}".format(tertiary_swell)),
+            html.Td(""),
+            html.Td("Weather: {}".format(hoverData['points'][0]['customdata']['condition']['weather']))
+        ])
+    ], style={'border': '1px solid black'})
+    return table
 
 @app.callback(Output('hover-data', 'children'), [Input('surf-forecast', 'hoverData')])
 def update_hoverdata(hoverData):
