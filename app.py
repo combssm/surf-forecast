@@ -9,11 +9,6 @@ import dash_core_components as dcc
 import dash_html_components as html
 import plotly.graph_objs as go
 
-# TODO: Set Default Values for elements
-# TODO: Multiple Outputs
-# TODO: Update Forecast-detail on Click
-# TODO: Customize Data in Hoverbox
-
 
 API_KEY = 'e53638829bea94ae3a45213abb63a7ad'
 FIELDS = [
@@ -27,11 +22,11 @@ server = app.server
 app.config['suppress_callback_exceptions'] = True
 
 app.layout = html.Div([
-    dcc.Dropdown(id='spot-picker', options=[{'label': str('Virginia Beach'), 'value': 396}, {'label': 'S-Turns', 'value': 398}], value='Virginia Beach', placeholder="Choose Spot"),
-    dcc.Graph(id='forecast-graph')
+    dcc.Dropdown(id='spot-picker', options=[{'label': str('Virginia Beach'), 'value': 396}, {'label': 'S-Turns', 'value': 398}], value=396, clearable=False),
+    html.Div(id='forecast-graph'),
 ], style={'align': 'center'})
 
-@app.callback(Output('forecast-graph', 'figure'), [Input('spot-picker', 'value')])
+@app.callback(Output('forecast-graph', 'children'), [Input('spot-picker', 'value')])
 def update_figure(selected_spot):
     response = requests.get(
         'http://magicseaweed.com/api/{}/forecast/?spot_id={}&units={}&fields={}'.format(
@@ -72,7 +67,7 @@ def update_figure(selected_spot):
                 hovermode='closest',
             )
     }
-    return graph
+    return dcc.Graph(id='forecast', figure=graph)
 
 if __name__ == '__main__':
     app.run_server()
