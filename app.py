@@ -16,19 +16,18 @@ FIELDS = [
     'swell.components.*', 'wind.*', 'condition.temperature',
     'condition.weather', 'fadedRating', 'solidRating']
 
-app = dash.Dash()
-server = app.server
-
 SPOTS = [{'label': str('Virginia Beach'), 'value': 396},
          {'label': str('S-Turns'), 'value': 398}]
 
+app = dash.Dash()
+server = app.server
 app.config['suppress_callback_exceptions'] = True
 
 app.layout = html.Div([
-    dcc.Dropdown(id='spot-picker', 
-                 options=[{'label': i['label'], 'value': i['value']} for i in SPOTS], 
-                 value=396, 
-                 clearable=False
+    dcc.Dropdown(id='spot-picker',
+                options=[{'label': i['label'], 'value': i['value']} for i in SPOTS],
+                value=396,
+                clearable=False
     ),
     html.Div(id='forecast-graph'),
 ], style={'align': 'center'})
@@ -45,36 +44,36 @@ def update_figure(selected_spot):
             'data': [
                 # primary
                 go.Scatter(
-                    x = [datetime.fromtimestamp(f['timestamp']) for f in response],
-                    y = [f['swell']['components']['primary']['height'] if f['swell']['components'].get('primary') else 'null' for f in response],
+                    x=[datetime.fromtimestamp(f['timestamp']) for f in response],
+                    y=[f['swell']['components']['primary']['height'] if f['swell']['components'].get('primary') else 'null' for f in response],
                     customdata=response,
-                    mode = 'lines+markers',
-                    name = 'primary'
+                    mode='lines+markers',
+                    name='primary'
                 ),
                 # secondary
                 go.Scatter(
-                    x = [datetime.fromtimestamp(f['timestamp']) for f in response],
-                    y = [f['swell']['components']['secondary']['height'] if f['swell']['components'].get('secondary') else 'null' for f in response],
+                    x=[datetime.fromtimestamp(f['timestamp']) for f in response],
+                    y=[f['swell']['components']['secondary']['height'] if f['swell']['components'].get('secondary') else 'null' for f in response],
                     customdata=response,
-                    mode = 'lines+markers',
-                    name = 'secondary'
+                    mode='lines+markers',
+                    name='secondary'
                 ),
                 # tertiary
                 go.Scatter(
-                    x = [datetime.fromtimestamp(f['timestamp']) for f in response],
-                    y = [f['swell']['components']['tertiary']['height'] if f['swell']['components'].get('tertiary') else 'null' for f in response],
+                    x=[datetime.fromtimestamp(f['timestamp']) for f in response],
+                    y=[f['swell']['components']['tertiary']['height'] if f['swell']['components'].get('tertiary') else 'null' for f in response],
                     customdata=response,
-                    mode = 'lines+markers',
-                    name = 'tertiary'
+                    mode='lines+markers',
+                    name='tertiary'
                 )
             ],
             'layout': go.Layout(
-                title = '5 Day Surf Forecast',
-                yaxis = {'title': 'Wave Height (ft)'},
+                title='5 Day Surf Forecast',
+                yaxis={'title': 'Wave Height (ft)'},
                 hovermode='closest',
             )
     }
-    return dcc.Graph(id='forecast', figure=graph)
+    return dcc.Graph(id='forecast', figure=graph, config={'displayModeBar': False})
 
 if __name__ == '__main__':
     app.run_server()
