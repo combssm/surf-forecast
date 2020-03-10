@@ -19,10 +19,17 @@ FIELDS = [
 app = dash.Dash()
 server = app.server
 
+SPOTS = [{'label': str('Virginia Beach'), 'value': 396},
+         {'label': str('S-Turns'), 'value': 398}]
+
 app.config['suppress_callback_exceptions'] = True
 
 app.layout = html.Div([
-    dcc.Dropdown(id='spot-picker', options=[{'label': str('Virginia Beach'), 'value': 396}, {'label': 'S-Turns', 'value': 398}], value=396, clearable=False),
+    dcc.Dropdown(id='spot-picker', 
+                 options=[{'label': i['label'], 'value': i['value']} for i in SPOTS], 
+                 value=396, 
+                 clearable=False
+    ),
     html.Div(id='forecast-graph'),
 ], style={'align': 'center'})
 
