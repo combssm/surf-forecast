@@ -20,7 +20,13 @@ SPOTS = [{'label': str('Virginia Beach'), 'value': 396},
 
 app = dash.Dash(__name__)
 server = app.server
+app.config.update({
+    # remove the default of '/'
+    'routes_pathname_prefix': '',
 
+    # remove the default of '/'
+    'requests_pathname_prefix': ''
+})
 response = requests.get(
     'http://magicseaweed.com/api/{}/forecast/?spot_id={}&units={}&fields={}'.format(
         API_KEY,
