@@ -18,7 +18,7 @@ FIELDS = ['timestamp', 'swell.components.primary.height']
 SPOTS = [{'label': str('Virginia Beach'), 'value': 396},
          {'label': str('S-Turns'), 'value': 398}]
 
-app = dash.Dash(url_base_pathname='/surf-forecast/')
+app = dash.Dash()
 server = app.server
 
 response = requests.get(
