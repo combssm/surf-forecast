@@ -18,7 +18,7 @@ FIELDS = ['timestamp', 'swell.components.*']
 SPOTS = [{'label': str('Virginia Beach'), 'value': 396},
          {'label': str('S-Turns'), 'value': 398}]
 
-app = dash.Dash()
+app = dash.Dash(serve_locally = False)
 server = app.server
 
 app.layout = html.Div([
