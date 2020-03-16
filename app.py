@@ -18,7 +18,7 @@ FIELDS = ['timestamp', 'swell.components.primary.height']
 SPOTS = [{'label': str('Virginia Beach'), 'value': 396},
          {'label': str('S-Turns'), 'value': 398}]
 
-app = dash.Dash()
+app = dash.Dash(__name__)
 server = app.server
 
 response = requests.get(
