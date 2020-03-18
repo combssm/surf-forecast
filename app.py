@@ -10,11 +10,9 @@ import dash_core_components as dcc
 import dash_html_components as html
 import plotly.graph_objs as go
 
-import pandas as pd
-
 
 API_KEY = 'e53638829bea94ae3a45213abb63a7ad'
-FIELDS = ['timestamp', 'swell.components.primary.height']
+FIELDS = ['timestamp', 'swell.components.primary.height', 'swell.components.secondary.height', 'swell.components.tertiary.height']
 SPOTS = [{'label': str('Virginia Beach'), 'value': 396},
          {'label': str('S-Turns'), 'value': 398}]
 
@@ -36,6 +34,20 @@ figure = {
                 y = [f['swell']['components']['primary']['height'] for f in response],
                 mode = 'lines+markers',
                 name = 'primary'
+            ),
+            # secondary
+            go.Scatter(
+                x = [datetime.fromtimestamp(f['timestamp']) for f in response],
+                y = [f['swell']['components']['secondary']['height'] if f['swell']['components'].get('secondary') else 'null' for f in response],
+                mode = 'lines+markers',
+                name = 'secondary'
+            ),
+            # tertiary
+            go.Scatter(
+                x = [datetime.fromtimestamp(f['timestamp']) for f in response],
+                y = [f['swell']['components']['tertiary']['height'] if f['swell']['components'].get('tertiary') else 'null' for f in response],
+                mode = 'lines+markers',
+                name = 'tertiary'
             )
         ],
         'layout': go.Layout(
