@@ -38,14 +38,14 @@ figure = {
             # secondary
             go.Scatter(
                 x = [datetime.fromtimestamp(f['timestamp']) for f in response],
-                y = [f['swell']['components']['secondary']['height'] if f['swell']['components'].get('secondary') else 'null' for f in response],
+                y = [f['swell']['components']['secondary']['height'] if f['swell']['components'].get('secondary') else 0 for f in response],
                 mode = 'lines+markers',
                 name = 'secondary'
             ),
             # tertiary
             go.Scatter(
                 x = [datetime.fromtimestamp(f['timestamp']) for f in response],
-                y = [f['swell']['components']['tertiary']['height'] if f['swell']['components'].get('tertiary') else 'null' for f in response],
+                y = [f['swell']['components']['tertiary']['height'] if f['swell']['components'].get('tertiary') else 0 for f in response],
                 mode = 'lines+markers',
                 name = 'tertiary'
             )
