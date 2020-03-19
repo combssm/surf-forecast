@@ -62,6 +62,7 @@ app.layout = html.Div(
         dcc.Graph(id='forecast-graph', figure=figure),
         html.Div(id='forecast-detail', style={'border': '3px solid black'})
     ]
+)
 
 if __name__ == '__main__':
     app.run_server()
