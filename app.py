@@ -61,7 +61,7 @@ app.layout = html.Div(
     [
         html.Div(dcc.Graph(id='forecast-graph', figure=figure), style={'border': '3px solid black', 'width': '56%'}),
         html.Div("Some Text", id='forecast-detail', style={'border': '3px solid black', 'width': '24%'})
-    ], style={'display': 'inline-block', 'padding': '15px', 'width': '100%'}
+    ], style={'display': 'inline-block', 'padding': '15px', 'width': '100%', 'border': '3px solid black'}
 )
 
 if __name__ == '__main__':
