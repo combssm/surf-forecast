@@ -59,9 +59,9 @@ figure = {
 
 app.layout = html.Div(
     [
-        html.Div(dcc.Graph(id='forecast-graph', figure=figure), style={'border': '3px solid black', 'float': 'left', 'margin-right': '10px'}),
-        html.Div("Some Text", id='forecast-detail', style={'border': '3px solid black', 'margin-left': '8px', 'width': '200px', 'position': 'relative'})
-    ], style={'display': 'inline-block'}
+        html.Div(dcc.Graph(id='forecast-graph', figure=figure), style={'border': '3px solid black', 'float': 'left', 'width': '75%', 'padding': '0 10px'}),
+        html.Div("Some Text", id='forecast-detail', style={'border': '3px solid black', 'float': 'left', 'margin-left': '8px', 'width': '25%', 'padding': '0 10px'})
+    ], style={'display': 'tables', 'clear': 'both'}
 )
 
 if __name__ == '__main__':
