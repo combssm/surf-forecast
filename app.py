@@ -57,7 +57,7 @@ figure = {
         )
 }
 
-app.layout = html.Div([dcc.Graph(id='forecast-graph', figure=figure)])
+app.layout = html.Div([dcc.Graph(id='forecast-graph', figure=figure)], style={'border': '3px solid black'})
 
 if __name__ == '__main__':
     app.run_server()
