@@ -59,7 +59,7 @@ figure = {
 
 app.layout = html.Div(
     [
-        html.Div(dcc.Graph(id='forecast-graph', figure=figure), style={'border': '3px solid black'}),
+        dcc.Graph(id='forecast-graph', figure=figure),
         html.Div(id='forecast-detail', style={'border': '3px solid black'})
     ]
 
