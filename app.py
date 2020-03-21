@@ -69,6 +69,20 @@ app.layout = html.Div(
 
 @app.callback(Output('forecast-detail', 'children'), [Input('forecast-graph', 'hoverData')])
 def update_forecast_detail(hoverData):
+    if not points[0]['customdata']['swell']['components'].get('secondary'):
+        points[0]['customdata']['swell']['components']['secondary'] = {
+            'compassDirection': None,
+            'direction': None,
+            'height': None,
+            'period': None
+        }
+    if not points[0]['customdata']['swell']['components'].get('tertiary'):
+        points[0]['customdata']['swell']['components']['tertiary'] = {
+            'compassDirection': None,
+            'direction': None,
+            'height': None,
+            'period': None
+        }
     return html.Pre("""Forecast Details:
 Primary Swell:   {points[0][customdata][swell][components][primary][height]} @ {points[0][customdata][swell][components][primary][period]}s {points[0][customdata][swell][components][primary][compassDirection]}
 Secondary Swell: {points[0][customdata][swell][components][secondary][height]} @ {points[0][customdata][swell][components][secondary][period]}s {points[0][customdata][swell][components][secondary][compassDirection]}
