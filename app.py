@@ -69,15 +69,15 @@ app.layout = html.Div(
 
 @app.callback(Output('forecast-detail', 'children'), [Input('forecast-graph', 'hoverData')])
 def update_forecast_detail(hoverData):
-    if not points[0]['customdata']['swell']['components'].get('secondary'):
-        points[0]['customdata']['swell']['components']['secondary'] = {
+    if not hoverData['points'][0]['customdata']['swell']['components'].get('secondary'):
+        hoverData['points'][0]['customdata']['swell']['components']['secondary'] = {
             'compassDirection': None,
             'direction': None,
             'height': None,
             'period': None
         }
-    if not points[0]['customdata']['swell']['components'].get('tertiary'):
-        points[0]['customdata']['swell']['components']['tertiary'] = {
+    if not hoverData['points'][0]['customdata']['swell']['components'].get('tertiary'):
+        hoverData['points'][0]['customdata']['swell']['components']['tertiary'] = {
             'compassDirection': None,
             'direction': None,
             'height': None,
