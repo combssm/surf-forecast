@@ -74,7 +74,7 @@ Primary Swell:   {hoverData['swell']['components']['primary']['height']} @ {hove
 Secondary Swell: {hoverData['swell']['components']['secondary']['height']} @ {hoverData['swell']['components']['secondary']['period']}s {hoverData['swell']['components']['secondary']['compassDirection']}
 Tertiary Swell:  {hoverData['swell']['components']['tertiary']['height']} @ {hoverData['swell']['components']['tertiary']['period']}s {hoverData['swell']['components']['tertiary']['compassDirection']}
 Wind Condition:  {hoverData['wind']['speed']}mph {hoverData['wind']['compassDirection']}
-Temperature:     {hoverdata['condition']['temperature']}F""".format(**hoverData)
+Temperature:     {hoverData['condition']['temperature']}F""".format(**hoverData)
     )
 
 
