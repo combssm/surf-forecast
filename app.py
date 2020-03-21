@@ -70,7 +70,6 @@ app.layout = html.Div(
 @app.callback(Output('forecast-detail', 'children'), [Input('forecast-graph', 'hoverData')])
 def update_forecast_detail(hoverData):
     return html.Pre("""Forecast Details:
-Date:            {datetime.fromtimestamp(hoverData['timestamp'])}
 Primary Swell:   {hoverData['swell']['components']['primary']['height']} @ {hoverData['swell']['components']['primary']['period']}s {hoverData['swell']['components']['primary']['compassDirection']}
 Secondary Swell: {hoverData['swell']['components']['secondary']['height']} @ {hoverData['swell']['components']['secondary']['period']}s {hoverData['swell']['components']['secondary']['compassDirection']}
 Tertiary Swell:  {hoverData['swell']['components']['tertiary']['height']} @ {hoverData['swell']['components']['tertiary']['period']}s {hoverData['swell']['components']['tertiary']['compassDirection']}
