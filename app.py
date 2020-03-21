@@ -69,7 +69,13 @@ app.layout = html.Div(
 
 @app.callback(Output('forecast-detail', 'children'), [Input('forecast-graph', 'hoverData')])
 def update_forecast_detail(hoverData):
-    return html.Pre(json.dumps(hoverData, indent=2))
+    return html.Pre("""Forecast Details:
+Primary Swell:   {points[0][customdata][swell][components][primary][height]} @ {points[0][customdata][swell][components][primary][period]}s {points[0][customdata][swell][components][primary][compassDirection]}
+Secondary Swell: {points[0][customdata][swell][components][secondary][height]} @ {points[0][customdata][swell][components][secondary][period]}s {points[0][customdata][swell][components][secondary][compassDirection]}
+Tertiary Swell:  {points[0][customdata][swell][components][tertiary][height]} @ {points[0][customdata][swell][components][tertiary][period]}s {points[0][customdata][swell][components][tertiary][compassDirection]}
+Wind Condition:  {points[0][customdata][wind][speed]}mph {points[0][customdata][wind][compassDirection]}
+Temperature:     {points[0][customdata][condition][temperature]}F""".format(**hoverData)
+    )
 
 
 if __name__ == '__main__':
