@@ -69,18 +69,18 @@ app.layout = html.Div(
 
 @app.callback(Output('forecast-detail', 'children'), [Input('forecast-graph', 'hoverData')])
 def update_forecast_detail(hoverData):
-    primary_swell =       "Primary Swell:   {points[0][customdata][swell][components][primary][height]}ft @ {points[0][customdata][swell][components][primary][period]}s {points[0][customdata][swell][components][primary][compassDirection]}".format(**hoverData)
+    primary_swell =       "Primary Swell   : {points[0][customdata][swell][components][primary][height]}ft @ {points[0][customdata][swell][components][primary][period]}s {points[0][customdata][swell][components][primary][compassDirection]}".format(**hoverData)
     if not hoverData['points'][0]['customdata']['swell']['components'].get('secondary'):
-        secondary_swell = "Secondary Swell:"
+        secondary_swell = "Secondary Swell :"
     else:
-        secondary_swell = "Secondary Swell: {points[0][customdata][swell][components][secondary][height]}ft @ {points[0][customdata][swell][components][secondary][period]}s {points[0][customdata][swell][components][secondary][compassDirection]}".format(**hoverData)
+        secondary_swell = "Secondary Swell : {points[0][customdata][swell][components][secondary][height]}ft @ {points[0][customdata][swell][components][secondary][period]}s {points[0][customdata][swell][components][secondary][compassDirection]}".format(**hoverData)
     if not hoverData['points'][0]['customdata']['swell']['components'].get('tertiary'):
-        tertiary_swell =  "Tertiary Swell:"
+        tertiary_swell =  "Tertiary Swell  :"
     else:
-        tertiary_swell =  "Tertiary Swell:  {points[0][customdata][swell][components][tertiary][height]}ft @ {points[0][customdata][swell][components][tertiary][period]}s {points[0][customdata][swell][components][tertiary][compassDirection]}".format(**hoverData)
-    wind_condition =      "Wind Condition:  {points[0][customdata][wind][speed]}mph {points[0][customdata][wind][compassDirection]}".format(**hoverData)
-    temperature =         "Temperature:     {points[0][customdata][condition][temperature]}F".format(**hoverData)
-    return html.Pre("""Forecast Details:
+        tertiary_swell =  "Tertiary Swell  :  {points[0][customdata][swell][components][tertiary][height]}ft @ {points[0][customdata][swell][components][tertiary][period]}s {points[0][customdata][swell][components][tertiary][compassDirection]}".format(**hoverData)
+    wind_condition =      "Wind Condition  :  {points[0][customdata][wind][speed]}mph {points[0][customdata][wind][compassDirection]}".format(**hoverData)
+    temperature =         "Temperature     :     {points[0][customdata][condition][temperature]}F".format(**hoverData)
+    return html.Pre(    """Forecast Details:
 {}
 {}
 {}
