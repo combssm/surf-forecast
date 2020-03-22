@@ -69,28 +69,25 @@ app.layout = html.Div(
 
 @app.callback(Output('forecast-detail', 'children'), [Input('forecast-graph', 'hoverData')])
 def update_forecast_detail(hoverData):
+    primary_swell = "Primary Swell:   {points[0][customdata][swell][components][primary][height]}ft @ {points[0][customdata][swell][components][primary][period]}s {points[0][customdata][swell][components][primary][compassDirection]}".format(**hoverData)
     if not hoverData['points'][0]['customdata']['swell']['components'].get('secondary'):
-        hoverData['points'][0]['customdata']['swell']['components']['secondary'] = {
-            'compassDirection': None,
-            'direction': None,
-            'height': None,
-            'period': None
-        }
+        secondary_swell = None
+    else:
+        secondary_swell = "Secondary Swell: {points[0][customdata][swell][components][secondary][height]}ft @ {points[0][customdata][swell][components][secondary][period]}s {points[0][customdata][swell][components][secondary][compassDirection]}".format(**hoverData)
     if not hoverData['points'][0]['customdata']['swell']['components'].get('tertiary'):
-        hoverData['points'][0]['customdata']['swell']['components']['tertiary'] = {
-            'compassDirection': None,
-            'direction': None,
-            'height': None,
-            'period': None
-        }
+        tertiary_swell = None
+    else:
+        tertiary_swell = "Tertiary Swell:  {points[0][customdata][swell][components][tertiary][height]}ft @ {points[0][customdata][swell][components][tertiary][period]}s {points[0][customdata][swell][components][tertiary][compassDirection]}".format(**hoverData)
+    wind_condition = "Wind Condition:  {points[0][customdata][wind][speed]}mph {points[0][customdata][wind][compassDirection]}".format(**hoverData)
+    temperature = "Temperature:     {points[0][customdata][condition][temperature]}F".format(**hoverData)
     return html.Pre("""Forecast Details:
-Primary Swell:   {points[0][customdata][swell][components][primary][height]} @ {points[0][customdata][swell][components][primary][period]}s {points[0][customdata][swell][components][primary][compassDirection]}
-Secondary Swell: {points[0][customdata][swell][components][secondary][height]} @ {points[0][customdata][swell][components][secondary][period]}s {points[0][customdata][swell][components][secondary][compassDirection]}
-Tertiary Swell:  {points[0][customdata][swell][components][tertiary][height]} @ {points[0][customdata][swell][components][tertiary][period]}s {points[0][customdata][swell][components][tertiary][compassDirection]}
-Wind Condition:  {points[0][customdata][wind][speed]}mph {points[0][customdata][wind][compassDirection]}
-Temperature:     {points[0][customdata][condition][temperature]}F""".format(**hoverData)
-    )
+{}
+{}
+{}
+{}
+{}""".format(primary_swell, secondary_swell, tertiary_swell, wind_condition, temperature))
 
 
 if __name__ == '__main__':
     app.run_server()
+    
