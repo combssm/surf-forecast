@@ -85,9 +85,9 @@ app.layout = html.Div(
 def update_forecast_detail(clickData):
     date = datetime.fromtimestamp(clickData['points'][0]['customdata']['timestamp'])
     if clickData['points'][0]['customdata']['swell']['minBreakingHeight'] == clickData['points'][0]['customdata']['swell']['maxBreakingHeight']:
-        swell_size = clickData['points'][0]['customdata']['swell']['minBreakingHeight']
+        swell_size =      "Swell Size      : {}".format(clickData['points'][0]['customdata']['swell']['minBreakingHeight'])
     else:
-        swell_size = str(clickData['points'][0]['customdata']['swell']['minBreakingHeight']) + " - " + str(clickData['points'][0]['customdata']['swell']['maxBreakingHeight'])
+        swell_size =      "Swell Size      : {}".format(str(clickData['points'][0]['customdata']['swell']['minBreakingHeight']) + " - " + str(clickData['points'][0]['customdata']['swell']['maxBreakingHeight']))
     primary_swell =       "Primary Swell   : {points[0][customdata][swell][components][primary][height]}ft @ {points[0][customdata][swell][components][primary][period]}s {points[0][customdata][swell][components][primary][compassDirection]}".format(**clickData)
     if not clickData['points'][0]['customdata']['swell']['components'].get('secondary'):
         secondary_swell = "Secondary Swell :"
