@@ -63,24 +63,24 @@ figure = {
 app.layout = html.Div(
     [
         html.Div(dcc.Graph(id='forecast-graph', figure=figure), style={'border': '3px solid black', 'float': 'left', 'width': '72%', 'margin': '5px'}),
-        html.Div("Forecast Details:", id='forecast-detail', style={'border': '3px solid black', 'float': 'left', 'width': '20%', 'padding': '10px', 'margin': '5px'})
+        html.Div("Click on a point to see more details", id='forecast-detail', style={'border': '3px solid black', 'float': 'left', 'width': '20%', 'padding': '10px', 'margin': '5px'})
     ], style={'display': 'inline-block', 'padding': '15px', 'width': '90%'}
 )
 
-@app.callback(Output('forecast-detail', 'children'), [Input('forecast-graph', 'hoverData')])
-def update_forecast_detail(hoverData):
-    date = datetime.fromtimestamp(hoverData['points'][0]['customdata']['timestamp'])
-    primary_swell =       "Primary Swell   : {points[0][customdata][swell][components][primary][height]}ft @ {points[0][customdata][swell][components][primary][period]}s {points[0][customdata][swell][components][primary][compassDirection]}".format(**hoverData)
-    if not hoverData['points'][0]['customdata']['swell']['components'].get('secondary'):
+@app.callback(Output('forecast-detail', 'children'), [Input('forecast-graph', 'clickData')])
+def update_forecast_detail(clickData):
+    date = datetime.fromtimestamp(clickData['points'][0]['customdata']['timestamp'])
+    primary_swell =       "Primary Swell   : {points[0][customdata][swell][components][primary][height]}ft @ {points[0][customdata][swell][components][primary][period]}s {points[0][customdata][swell][components][primary][compassDirection]}".format(**clickData)
+    if not clickData['points'][0]['customdata']['swell']['components'].get('secondary'):
         secondary_swell = "Secondary Swell :"
     else:
-        secondary_swell = "Secondary Swell : {points[0][customdata][swell][components][secondary][height]}ft @ {points[0][customdata][swell][components][secondary][period]}s {points[0][customdata][swell][components][secondary][compassDirection]}".format(**hoverData)
-    if not hoverData['points'][0]['customdata']['swell']['components'].get('tertiary'):
+        secondary_swell = "Secondary Swell : {points[0][customdata][swell][components][secondary][height]}ft @ {points[0][customdata][swell][components][secondary][period]}s {points[0][customdata][swell][components][secondary][compassDirection]}".format(**clickData)
+    if not clickData['points'][0]['customdata']['swell']['components'].get('tertiary'):
         tertiary_swell =  "Tertiary Swell  :"
     else:
-        tertiary_swell =  "Tertiary Swell  : {points[0][customdata][swell][components][tertiary][height]}ft @ {points[0][customdata][swell][components][tertiary][period]}s {points[0][customdata][swell][components][tertiary][compassDirection]}".format(**hoverData)
-    wind_condition =      "Wind Condition  : {points[0][customdata][wind][speed]}mph {points[0][customdata][wind][compassDirection]}".format(**hoverData)
-    temperature =         "Temperature     : {points[0][customdata][condition][temperature]}F".format(**hoverData)
+        tertiary_swell =  "Tertiary Swell  : {points[0][customdata][swell][components][tertiary][height]}ft @ {points[0][customdata][swell][components][tertiary][period]}s {points[0][customdata][swell][components][tertiary][compassDirection]}".format(**clickData)
+    wind_condition =      "Wind Condition  : {points[0][customdata][wind][speed]}mph {points[0][customdata][wind][compassDirection]}".format(**clickData)
+    temperature =         "Temperature     : {points[0][customdata][condition][temperature]}F".format(**clickData)
     return html.Pre(    """Forecast Details: {}
 {}
 {}
