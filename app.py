@@ -78,8 +78,8 @@ figure = {
 app.layout = html.Div(
     [
         html.Div(dcc.Graph(id='forecast-graph', figure=figure), style={'border': '3px solid black', 'float': 'left', 'width': '72%', 'margin': '5px'}),
-        html.Div("Click on a point to see more details", id='forecast-detail', style={'border': '3px solid black', 'float': 'left', 'width': '20%', 'padding': '10px', 'margin': '5px'})
-    ], style={'display': 'inline-block', 'padding': '15px', 'width': '90%'}
+        html.Div("Click on a point to see more details", id='forecast-detail', style={'border': '3px solid black', 'float': 'left', 'width': '28%', 'padding': '10px', 'margin': '5px'})
+    ], style={'display': 'inline-block', 'padding': '15px', 'width': 'auto'}
 )
 
 @app.callback(Output('forecast-detail', 'children'), [Input('forecast-graph', 'clickData')])
