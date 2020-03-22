@@ -77,9 +77,9 @@ def update_forecast_detail(hoverData):
     if not hoverData['points'][0]['customdata']['swell']['components'].get('tertiary'):
         tertiary_swell =  "Tertiary Swell  :"
     else:
-        tertiary_swell =  "Tertiary Swell  :  {points[0][customdata][swell][components][tertiary][height]}ft @ {points[0][customdata][swell][components][tertiary][period]}s {points[0][customdata][swell][components][tertiary][compassDirection]}".format(**hoverData)
-    wind_condition =      "Wind Condition  :  {points[0][customdata][wind][speed]}mph {points[0][customdata][wind][compassDirection]}".format(**hoverData)
-    temperature =         "Temperature     :     {points[0][customdata][condition][temperature]}F".format(**hoverData)
+        tertiary_swell =  "Tertiary Swell  : {points[0][customdata][swell][components][tertiary][height]}ft @ {points[0][customdata][swell][components][tertiary][period]}s {points[0][customdata][swell][components][tertiary][compassDirection]}".format(**hoverData)
+    wind_condition =      "Wind Condition  : {points[0][customdata][wind][speed]}mph {points[0][customdata][wind][compassDirection]}".format(**hoverData)
+    temperature =         "Temperature     : {points[0][customdata][condition][temperature]}F".format(**hoverData)
     return html.Pre(    """Forecast Details:
 {}
 {}
