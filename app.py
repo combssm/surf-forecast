@@ -63,12 +63,13 @@ figure = {
 app.layout = html.Div(
     [
         html.Div(dcc.Graph(id='forecast-graph', figure=figure), style={'border': '3px solid black', 'float': 'left', 'width': '56%'}),
-        html.Div("Some Text", id='forecast-detail', style={'border': '3px solid black', 'float': 'left', 'width': '24%'})
+        html.Div("Forecast Details:", id='forecast-detail', style={'border': '3px solid black', 'float': 'left', 'width': '24%'})
     ], style={'display': 'inline-block', 'padding': '15px', 'width': '100%', 'border': '3px solid black'}
 )
 
 @app.callback(Output('forecast-detail', 'children'), [Input('forecast-graph', 'hoverData')])
 def update_forecast_detail(hoverData):
+    date = datetime.fromtimestamp(hoverData['points'][0]['customdata']['timestamp'])
     primary_swell =       "Primary Swell   : {points[0][customdata][swell][components][primary][height]}ft @ {points[0][customdata][swell][components][primary][period]}s {points[0][customdata][swell][components][primary][compassDirection]}".format(**hoverData)
     if not hoverData['points'][0]['customdata']['swell']['components'].get('secondary'):
         secondary_swell = "Secondary Swell :"
@@ -80,12 +81,12 @@ def update_forecast_detail(hoverData):
         tertiary_swell =  "Tertiary Swell  : {points[0][customdata][swell][components][tertiary][height]}ft @ {points[0][customdata][swell][components][tertiary][period]}s {points[0][customdata][swell][components][tertiary][compassDirection]}".format(**hoverData)
     wind_condition =      "Wind Condition  : {points[0][customdata][wind][speed]}mph {points[0][customdata][wind][compassDirection]}".format(**hoverData)
     temperature =         "Temperature     : {points[0][customdata][condition][temperature]}F".format(**hoverData)
-    return html.Pre(    """Forecast Details:
+    return html.Pre(    """Forecast Details: {}
 {}
 {}
 {}
 {}
-{}""".format(primary_swell, secondary_swell, tertiary_swell, wind_condition, temperature))
+{}""".format(date, primary_swell, secondary_swell, tertiary_swell, wind_condition, temperature))
 
 
 if __name__ == '__main__':
