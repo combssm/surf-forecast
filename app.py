@@ -51,7 +51,21 @@ figure = {
                 mode = 'lines+markers',
                 name = 'tertiary',
                 customdata=response
-            )
+            ),
+            # swell.minBreakingHeight
+            go.Bar(
+                x = [datetime.fromtimestamp(f['timestamp']) for f in response],
+                y = [f['swell']['minBreakingHeight'] if f['swell'].get('minBreakingHeight') else 0 for f in response],
+                name = 'Min. Breaking Height',
+                marker = dict(color='#9EA0A1')
+            ),
+            # swell.maxBreakingHeight
+            go.Bar(
+                x = [datetime.fromtimestamp(f['timestamp']) for f in response],
+                y = [f['swell']['maxBreakingHeight'] if f['swell'].get('maxBreakingHeight') else 0 for f in response],
+                name = 'Min. Breaking Height',
+                marker = dict(color='#FFD700')
+            )            
         ],
         'layout': go.Layout(
             title = '5 Day Surf Forecast',
