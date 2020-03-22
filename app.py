@@ -84,6 +84,10 @@ app.layout = html.Div(
 @app.callback(Output('forecast-detail', 'children'), [Input('forecast-graph', 'clickData')])
 def update_forecast_detail(clickData):
     date = datetime.fromtimestamp(clickData['points'][0]['customdata']['timestamp'])
+    if clickData['points'][0]['customdata']['swell']['minBreakingHeight'] == clickData['points'][0]['customdata']['swell']['maxBreakingHeight']:
+        swell_size = clickData['points'][0]['customdata']['swell']['minBreakingHeight']
+    else:
+        swell_size = clickData['points'][0]['customdata']['swell']['minBreakingHeight'] + " - " + clickData['points'][0]['customdata']['swell']['maxBreakingHeight']
     primary_swell =       "Primary Swell   : {points[0][customdata][swell][components][primary][height]}ft @ {points[0][customdata][swell][components][primary][period]}s {points[0][customdata][swell][components][primary][compassDirection]}".format(**clickData)
     if not clickData['points'][0]['customdata']['swell']['components'].get('secondary'):
         secondary_swell = "Secondary Swell :"
@@ -96,11 +100,12 @@ def update_forecast_detail(clickData):
     wind_condition =      "Wind Condition  : {points[0][customdata][wind][speed]}mph {points[0][customdata][wind][compassDirection]}".format(**clickData)
     temperature =         "Temperature     : {points[0][customdata][condition][temperature]}F".format(**clickData)
     return html.Pre(    """Forecast Details: {}
+{}ft
 {}
 {}
 {}
 {}
-{}""".format(date, primary_swell, secondary_swell, tertiary_swell, wind_condition, temperature))
+{}""".format(date, swell_size, primary_swell, secondary_swell, tertiary_swell, wind_condition, temperature))
 
 
 if __name__ == '__main__':
