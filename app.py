@@ -79,7 +79,7 @@ def serve_layout():
 
     return html.Div(
         [
-            html.Div(dcc.Graph(id='forecast-graph', figure=figure), style={'border': '3px solid black', 'float': 'left', 'width': '70%', 'margin': '5px'}),
+            html.Div(dcc.Graph(id='forecast-graph', figure=figure), style={'box-shadow': '0 2px 10px #ccc', 'border': '1px solid #eee', 'float': 'left', 'width': '70%', 'margin': '5px'}),
             html.Div("Click on a point to see more details", id='forecast-detail', style={'border': '3px solid black', 'float': 'left', 'width': 'auto', 'padding': '10px', 'margin': '5px'})
         ], style={'display': 'inline-block', 'padding': '15px', 'width': '100%', 'position': 'fixed'}
     )
