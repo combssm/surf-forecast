@@ -81,7 +81,7 @@ def serve_layout():
         [
             html.Div(dcc.Graph(id='forecast-graph', figure=figure), style={'box-shadow': '0 2px 10px #ccc', 'border': '1px solid #eee', 'width': '80%', 'margin': '5px'}),
             html.Div("Click on a point to see more details", id='forecast-detail', style={'box-shadow': '0 2px 10px #ccc', 'border': '1px solid #eee', 'width': '25%', 'padding': '10px', 'margin': '5px', 'textAlign': 'left', 'backgroundColor': '#ceeaed'})
-        ], style={'display': 'inline-block', 'padding': '15px', 'width': '100%'}
+        ], style={'display': 'inline-block', 'padding': '15px', 'width': '100%', 'textAlign': 'center'}
     )
 
 #https://dash.plotly.com/live-updates
