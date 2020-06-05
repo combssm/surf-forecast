@@ -17,6 +17,7 @@ SPOTS = [{'label': str('Virginia Beach'), 'value': 396},
          {'label': str('S-Turns'), 'value': 398}]
 
 app = dash.Dash()
+app.css.append_css({'external_url': 'static/app.css'})
 server = app.server
 app.title = 'Combsvb Surf Forecast'
 
@@ -80,7 +81,7 @@ def serve_layout():
     return html.Div(
         [
             html.Div(dcc.Graph(id='forecast-graph', figure=figure), style={'box-shadow': '0 2px 10px #ccc', 'border': '1px solid #eee', 'width': '80%', 'margin': '5px'}),
-            html.Div("Click on a point to see more details", id='forecast-detail', style={'box-shadow': '0 2px 10px #ccc', 'border': '1px solid #eee', 'width': '60%', 'padding': '10px', 'margin': '5px', 'textAlign': 'center', 'backgroundColor': '#ceeaed'})
+            html.Div("Click on a point to see more details", id='forecast-detail', style={'box-shadow': '0 2px 10px #ccc', 'border': '1px solid #eee', 'width': 'auto', 'padding': '10px', 'margin': '5px', 'textAlign': 'center', 'backgroundColor': '#ceeaed'})
         ], style={'display': 'inline-block', 'padding': '15px', 'width': '100%'}
     )
 
