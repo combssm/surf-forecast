@@ -18,6 +18,7 @@ SPOTS = [{'label': str('Virginia Beach'), 'value': 396},
 
 app = dash.Dash()
 app.css.append_css({'external_url': '/static/app.css'})
+app.server.static_folder = 'static'
 server = app.server
 app.title = 'Combsvb Surf Forecast'
 
