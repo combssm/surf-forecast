@@ -16,9 +16,7 @@ FIELDS = ['timestamp', 'swell.*', 'wind.*', 'condition.temperature']
 SPOTS = [{'label': str('Virginia Beach'), 'value': 396},
          {'label': str('S-Turns'), 'value': 398}]
 
-app = dash.Dash('/home/combsvb/surf-forecast/')
-app.css.append_css({'external_url': '/static/app.css'})
-app.server.static_folder = 'static'
+app = dash.Dash(__name__)
 server = app.server
 app.title = 'Combsvb Surf Forecast'
 
