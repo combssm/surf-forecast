@@ -23,7 +23,7 @@ def serve_layout():
 
     response = requests.get(
         'http://magicseaweed.com/api/{}/forecast/?spot_id={}&units={}&fields={}'.format(
-            config['API_KEY'],
+            config['api_key'],
             396,
             "us", 
             ','.join(config['fields']))).json()
