@@ -13,7 +13,7 @@ import plotly.graph_objs as go
 
 
 with open('config.yaml', 'r') as conf:
-    config = yaml.load(conf, Loader=yaml.CLoader)
+    config = yaml.load(conf, Loader=yaml.Loader)
     
 app = dash.Dash(__name__)
 server = app.server
