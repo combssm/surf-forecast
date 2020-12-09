@@ -1,4 +1,5 @@
 import json
+import yaml
 from datetime import datetime
 from dateutil.parser import parse
 
@@ -11,11 +12,9 @@ import dash_html_components as html
 import plotly.graph_objs as go
 
 
-API_KEY = 'e53638829bea94ae3a45213abb63a7ad'
-FIELDS = ['timestamp', 'swell.*', 'wind.*', 'condition.temperature']
-SPOTS = [{'label': str('Virginia Beach'), 'value': 396},
-         {'label': str('S-Turns'), 'value': 398}]
-
+with open('config.yaml', 'r') as conf:
+    config = yaml.load(conf, Loader=yaml.CLoader)
+    
 app = dash.Dash(__name__)
 server = app.server
 app.title = 'Combsvb Surf Forecast'
@@ -24,10 +23,10 @@ def serve_layout():
 
     response = requests.get(
         'http://magicseaweed.com/api/{}/forecast/?spot_id={}&units={}&fields={}'.format(
-            API_KEY,
+            config['API_KEY'],
             396,
             "us", 
-            ','.join(FIELDS))).json()
+            ','.join(config['fields']))).json()
 
     figure = {
             'data': [
