@@ -130,3 +130,6 @@ dmypy.json
 
 # Visual Studio Code Stuff
 .vscode/
+
+# User-defined files
+config.yaml
