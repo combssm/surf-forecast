@@ -20,7 +20,7 @@ app = dash.Dash(__name__)
 server = app.server
 app.title = 'Combsvb Surf Forecast'
 
-def call_api(**kwargs):
+def call_api(key, spot_id, units, fields, **kwargs):
     return requests.get(
         f'http://magicseaweed.com/api/{key}/forecast/?spot_id={spot_id}&units={units}&fields={fields}').json()
     
