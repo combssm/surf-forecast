@@ -14,19 +14,21 @@ import plotly.graph_objs as go
 
 with open('config.yaml', 'r') as conf:
     config = yaml.load(conf, Loader=yaml.Loader)
+
     
 app = dash.Dash(__name__)
 server = app.server
 app.title = 'Combsvb Surf Forecast'
 
+
 def serve_layout():
+key = config['api']['key']
+spot_id = config['api']['spot'] # Virginia Beach
+units = config['api']['units'] # mph/fahrenheit
+fields = ','.config['api']['fields'].join() 
 
     response = requests.get(
-        'http://magicseaweed.com/api/{}/forecast/?spot_id={}&units={}&fields={}'.format(
-            config['api_key'],
-            396,
-            "us", 
-            ','.join(config['fields']))).json()
+        f'http://magicseaweed.com/api/{key}/forecast/?spot_id={spot_id}&units={units}&fields={fields}').json()
 
     figure = {
             'data': [

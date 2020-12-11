@@ -1,21 +1,8 @@
 # vim: ts=2 sw=2 expandtab syntax=yaml:
 ---
-api_key: "your magic seaweed api key goes here"
-
 # https://magicseaweed.com/developer/forecast-api
-# Possible values listed on API Guide at bottom
-fields:
-  - timestamp
-  - swell.*
-  - wind.*
-  - condition.temperature
-
-# spot id is in forecast url
-# ex: https://magicseaweed.com/Virginia-Beach-Surf-Report/396/
-spots:
-  - 
-    value: 396
-    label: 'Virginia Beach'
-  - 
-    value: 398
-    label: 'S-Turns'
+api:
+  key: "your magic seaweed api key goes here"
+  fields: "timestamp,swell.*,wind.*,condition.temperature"
+  spot_id: "396"
+  units: "us"
