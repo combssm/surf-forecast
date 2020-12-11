@@ -20,15 +20,13 @@ app = dash.Dash(__name__)
 server = app.server
 app.title = 'Combsvb Surf Forecast'
 
+def call_api(**kwargs):
+    return requests.get(
+        f'http://magicseaweed.com/api/{key}/forecast/?spot_id={spot_id}&units={units}&fields={fields}').json()
+    
 
 def serve_layout():
-key = config['api']['key']
-spot_id = config['api']['spot'] # Virginia Beach
-units = config['api']['units'] # mph/fahrenheit
-fields = ','.config['api']['fields'].join() 
-
-    response = requests.get(
-        f'http://magicseaweed.com/api/{key}/forecast/?spot_id={spot_id}&units={units}&fields={fields}').json()
+    response = call_api(**config['api'])
 
     figure = {
             'data': [
